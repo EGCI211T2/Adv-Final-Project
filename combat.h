@@ -3,7 +3,6 @@
 using namespace std;
 #include <time.h>
 #include <stdlib.h>
-
 class monster{
 private:
     string name;
@@ -14,16 +13,14 @@ public:
     int getsta();
     int getlvl();
     int getspd();
-    void charge();
     void upgrade();
     void level();
-    void describe();
     int nattack(monster);
     int sattack(monster);
     int cattack(monster);
-    void ndefend();
+    void combat(monster a,monster b);
+    int ndefend();
     void heal();
-    bool alive();
     monster(string,int = 20,int = 1,int = 1,int=10,int=1);
     ~monster();
 };
@@ -53,6 +50,7 @@ void monster::level(){
     lvl++;
 upoint+=(lvl-l)*3;
 }
+
  int gethp(){
     return hp;
  }
@@ -112,9 +110,6 @@ void monster::upgrade(){
         }
     }
 }
-void monster::charge(){
-    sta+=2;
-}
 int monster::sattack(monster x){
     int p=rand()%4;
     if(p==0){
@@ -160,11 +155,10 @@ int monster::cattack(monster x,int s){
     }
 
 }
-bool monster::alive ()
-{
-    if (hp<=0) return false;
-    else return true;
-
+int monster::ndefend(){
+    int x =def*rand()%10+1;
+    cout<<name<<" defends "<<x<<" damage."<<endl;
+    return x;
 }
 monster::~monster()
 {
@@ -174,12 +168,20 @@ void monster::describe(){
 
     
 }
-void combat(monster a, monster b){
-do{
-    int bc=rand()%3+1;
-    int a.hp=a.gethp(),a.sta=a.getsta(),a.lvl=a.getlvl(),a.getspd(),b.hp=b.gethp(),b.lvl=b.getlvl(),b.spd=b.getspd();
+void monster::combat(monster a, monster b){
+ int a.hp=a.gethp(),a.sta=a.getsta(),a.lvl=a.getlvl(),a.getspd(),b.hp=b.gethp(),b.lvl=b.getlvl(),b.spd=b.getspd();
     int ea=a.sta/2, c;
-    int a.atk=0,a.def,b.atk=0,b.def;
+    int turn=0;
+do{
+    if(turn>0){
+        ea+=2;
+        if(ea>=a.sta){
+            ea=a.sta;
+        }
+    }
+    turn++;
+    int bc=rand()%3+1;
+    int a.atk=0,a.def,b.atk=0,b.def,f;
     cout<<"----------------------------------"<<endl;
     cout<<a.name<<endl;
     cout<<"HP: "<<a.hp<<"  Level: "<<a.lvl<<"  Speed: "<<a.spd<<endl;
@@ -203,7 +205,38 @@ do{
     }while(c<1||c>5);
     switch c
     case 1{
-        if(b.spd>a.spd&&bc!=3){
+        if(b.spd>a.spd){
+            switch bc
+            case 1{
+                b.atk=b.nattack();
+                a.def=ndefend();
+                f=b.atk-a.def;
+                if(f<0){
+                    f=0;
+                }
+                if(f>0&&b.atk!=0)
+                {
+                    a.hp-=f;
+                    cout<<b.name<<" deals "<<f<<" damage."<<endl;                   
+                    if(a.hp<0)
+                    {
+                    a.hp=0
+                    }
+                    if(hp>0){
+                    cout<<a.name<<" has "<<a.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<a.name<<" is dead."<<endl;
+                    }
+                    
+                }
+                else if(f==0&&b.atk!=0) {
+                    cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                }
+            }
+            case 2{
+
+            }
             
         }
         
