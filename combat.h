@@ -20,6 +20,7 @@ public:
     int cattack(monster);
     void combat(monster a,monster b);
     int ndefend();
+    int defend();
     void heal();
     monster(string,int = 20,int = 1,int = 1,int=10,int=1);
     ~monster();
@@ -85,27 +86,27 @@ void monster::upgrade(){
                 continue;
             }
             else{
-                switch c
-                case 0{
+                switch (c){
+                case 0:
                         break;
-                }
-                case 1{
+                
+                case 1:
                     hp+=5
-                }
-                case 2{
+                
+                case 2:
                     sta+=2
-                }
-                case 3{
+                
+                case 3:
                     spd++;
-                }
-                case 4{
+                
+                case 4:
                     atk++;
-                }
-                case 5{
+                
+                case 5:
                     def++;
-                }
+                
             }
-
+            }
             
         }
     }
@@ -160,6 +161,11 @@ int monster::ndefend(){
     cout<<name<<" defends "<<x<<" damage."<<endl;
     return x;
 }
+int monster::defend(){
+    int x =def*2
+    cout<<name<<"use protection for "<<x<<" damage."<<endl;
+    return x;
+}
 monster::~monster()
 {
     cout<<name<<" is dead."<<endl;
@@ -181,7 +187,7 @@ do{
     }
     turn++;
     int bc=rand()%3+1;
-    int a.atk=0,a.def,b.atk=0,b.def,f;
+    int a.atk=0,a.def,b.atk=0,b.def,af,bf;
     cout<<"----------------------------------"<<endl;
     cout<<a.name<<endl;
     cout<<"HP: "<<a.hp<<"  Level: "<<a.lvl<<"  Speed: "<<a.spd<<endl;
@@ -204,46 +210,723 @@ do{
     }
     }while(c<1||c>5);
     switch c
-    case 1{
+    case 1:
         if(b.spd>a.spd){
-            switch bc
-            case 1{
+            switch (bc)
+            {
+            case 1:
                 b.atk=b.nattack();
-                a.def=ndefend();
-                f=b.atk-a.def;
-                if(f<0){
-                    f=0;
+                a.def=a.ndefend();
+                bf=b.atk-a.def;
+                if(bf<0){
+                    bf=0;
                 }
-                if(f>0&&b.atk!=0)
+                if(bf>0&&b.atk!=0)
                 {
-                    a.hp-=f;
-                    cout<<b.name<<" deals "<<f<<" damage."<<endl;                   
+                    a.hp-=bf;
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
                     if(a.hp<0)
                     {
                     a.hp=0
                     }
-                    if(hp>0){
+                    if(a.hp>0){
                     cout<<a.name<<" has "<<a.hp<<" left."<<endl;
                     }
                     else{
                         cout<<a.name<<" is dead."<<endl;
+                        break;
                     }
                     
                 }
-                else if(f==0&&b.atk!=0) {
+                else if(bf==0&&b.atk!=0) {
                     cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
                 }
-            }
-            case 2{
-
-            }
+                a.atk=a.nattack();
+                b.def=b.ndefend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                  else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
             
+            case 2:
+                int heal=b.gethp()/10;
+                b.hp+=heal;
+                if(b.hp>=b.gethp())
+                {
+                    b.hp=b.gethp();
+                }
+                cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                a.atk=a.nattack();
+                b.def=b.ndefend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+            
+            case 3:
+                b.def=b.defend();
+                a.atk=a.nattack();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }  
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
         }
-        
-    }
+       }
+       else{
+        switch (bc){
+            case 1:
+                a.atk=a.nattack();
+                b.def=b.ndefend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+                b.atk=b.nattack();
+                a.def=a.ndefend();
+                bf=b.atk-a.def;
+                if(bf<0){
+                    bf=0;
+                }
+                if(bf>0&&b.atk!=0)
+                {
+                    a.hp-=bf;
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    if(a.hp<0)
+                    {
+                    a.hp=0
+                    }
+                    if(a.hp>0){
+                    cout<<a.name<<" has "<<a.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<a.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                else if(bf==0&&b.atk!=0) {
+                    cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                }
+
+            case 2:
+             a.atk=a.nattack();
+                b.def=b.ndefend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+                int heal=b.gethp()/10;
+                b.hp+=heal;
+                if(b.hp>=b.gethp())
+                {
+                    b.hp=b.gethp();
+                }
+                cout<<b.name<<" heals 10 percent of its HP."<<endl;
+            case 3:   
+                a.atk=a.nattack();
+                b.def=b.defend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }  
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+       }
+
+       } 
+    case 2:
+    if(b.spd>a.spd){
+            switch (bc)
+            {
+            case 1:
+                b.atk=b.nattack();
+                a.def=a.ndefend();
+                bf=b.atk-a.def;
+                if(bf<0){
+                    bf=0;
+                }
+                if(bf>0&&b.atk!=0)
+                {
+                    a.hp-=bf;
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    if(a.hp<0)
+                    {
+                    a.hp=0
+                    }
+                    if(a.hp>0){
+                    cout<<a.name<<" has "<<a.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<a.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                else if(bf==0&&b.atk!=0) {
+                    cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                }
+                a.atk=a.sattack();
+                b.def=b.ndefend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                  else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+            
+            case 2:
+                int heal=b.gethp()/10;
+                b.hp+=heal;
+                if(b.hp>=b.gethp())
+                {
+                    b.hp=b.gethp();
+                }
+                cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                a.atk=a.sattack();
+                b.def=b.ndefend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+            
+            case 3:
+                b.def=b.defend();
+                a.atk=a.sattack();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }  
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+        }
+       }
+       else{
+        switch (bc){
+            case 1:
+                a.atk=a.sattack();
+                b.def=b.ndefend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+                b.atk=b.nattack();
+                a.def=a.ndefend();
+                bf=b.atk-a.def;
+                if(bf<0){
+                    bf=0;
+                }
+                if(bf>0&&b.atk!=0)
+                {
+                    a.hp-=bf;
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    if(a.hp<0)
+                    {
+                    a.hp=0
+                    }
+                    if(a.hp>0){
+                    cout<<a.name<<" has "<<a.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<a.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                else if(bf==0&&b.atk!=0) {
+                    cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                }
+
+            case 2:
+             a.atk=a.sattack();
+                b.def=b.ndefend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+                int heal=b.gethp()/10;
+                b.hp+=heal;
+                if(b.hp>=b.gethp())
+                {
+                    b.hp=b.gethp();
+                }
+                cout<<b.name<<" heals 10 percent of its HP."<<endl;
+            case 3:   
+                a.atk=a.sattack();
+                b.def=b.defend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }  
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+       }
+
+       }
+    case 3:
+    if(b.spd>a.spd){
+            switch (bc)
+            {
+            case 1:
+                b.atk=b.nattack();
+                a.def=a.ndefend();
+                bf=b.atk-a.def;
+                if(bf<0){
+                    bf=0;
+                }
+                if(bf>0&&b.atk!=0)
+                {
+                    a.hp-=bf;
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    if(a.hp<0)
+                    {
+                    a.hp=0
+                    }
+                    if(a.hp>0){
+                    cout<<a.name<<" has "<<a.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<a.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                else if(bf==0&&b.atk!=0) {
+                    cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                }
+                a.atk=a.cattack();
+                b.def=b.ndefend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                  else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+            
+            case 2:
+                int heal=b.gethp()/10;
+                b.hp+=heal;
+                if(b.hp>=b.gethp())
+                {
+                    b.hp=b.gethp();
+                }
+                cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                a.atk=a.cattack();
+                b.def=b.ndefend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+            
+            case 3:
+                b.def=b.defend();
+                a.atk=a.cattack();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }  
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+        }
+       }
+       else{
+        switch (bc){
+            case 1:
+                a.atk=a.cattack();
+                b.def=b.ndefend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+                b.atk=b.cattack();
+                a.def=a.ndefend();
+                bf=b.atk-a.def;
+                if(bf<0){
+                    bf=0;
+                }
+                if(bf>0&&b.atk!=0)
+                {
+                    a.hp-=bf;
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    if(a.hp<0)
+                    {
+                    a.hp=0
+                    }
+                    if(a.hp>0){
+                    cout<<a.name<<" has "<<a.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<a.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                else if(bf==0&&b.atk!=0) {
+                    cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                }
+
+            case 2:
+             a.atk=a.cattack();
+                b.def=b.ndefend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+                int heal=b.gethp()/10;
+                b.hp+=heal;
+                if(b.hp>=b.gethp())
+                {
+                    b.hp=b.gethp();
+                }
+                cout<<b.name<<" heals 10 percent of its HP."<<endl;
+            case 3:   
+                a.atk=a.cattack();
+                b.def=b.defend();
+                af=a.atk-b.def;
+                if(af<0){
+                    af=0;
+                }
+                if(af>0&&a.atk!=0)
+                {
+                    b.hp-=af;
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    if(b.hp<0)
+                    {
+                    b.hp=0
+                    }
+                    if(b.hp>0){
+                    cout<<a.name<<" has "<<b.hp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<b.name<<" is dead."<<endl;
+                        break;
+                    }  
+                }
+                else if(af==0&&a.atk!=0) {
+                    cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                }
+       }
+
+       }
 
 
     
 
-}while(a.alive()==1&&b.alive()==1);
+}while(a.hp>0&&b.hp>0);
 }
