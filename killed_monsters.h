@@ -17,8 +17,8 @@ public:
     KilledMonsters();
     void addMonster(const string& monster);
     void printKilledMonsters() const;
-    void saveToFile(const string& filename) const;
-    void loadFromFile(const string& filename);
+    void saveToFile() const;
+    void loadFromFile();
 };
 
 KilledMonsters::KilledMonsters() : count(0) {}
@@ -37,8 +37,8 @@ void KilledMonsters::printKilledMonsters() const {
     }
 }
 
-void KilledMonsters::saveToFile(const string& filename) const {
-    ofstream outFile(filename);
+void KilledMonsters::saveToFile() const {
+    ofstream outFile("monsters.txt");
     if (outFile.is_open()) {
         outFile << count << endl;
         for (int i = 0; i < count; ++i) {
@@ -46,12 +46,12 @@ void KilledMonsters::saveToFile(const string& filename) const {
         }
         outFile.close();
     } else {
-        cout << "Unable to open file for writing: " << filename << endl;
+        cout << "Unable to open file for writing: monsters.txt" << endl;
     }
 }
 
-void KilledMonsters::loadFromFile(const string& filename) {
-    ifstream inFile(filename);
+void KilledMonsters::loadFromFile() {
+    ifstream inFile("monsters.txt");
     if (inFile.is_open()) {
         inFile >> count;
         inFile.ignore(); // To ignore the newline character after count
@@ -60,7 +60,7 @@ void KilledMonsters::loadFromFile(const string& filename) {
         }
         inFile.close();
     } else {
-        cout << "Unable to open file for reading: " << filename << endl;
+        cout << "Unable to open file for reading: monsters.txt" << endl;
     }
 }
 

@@ -5,7 +5,6 @@
 #include <string>
 #include <fstream>
 #include <limits>
-
 #include "killed_monsters.h"
 
 using namespace std;
@@ -121,8 +120,7 @@ bool DataStorage::loadPlayerProfile(const string& name, PlayerStats& stats, Kill
                 player_count++;
                 
                 // Load the corresponding killed monsters
-                string monsters_filename = player_name + "_monsters.txt";
-                killedMonsters.loadFromFile(monsters_filename);
+                killedMonsters.loadFromFile();
                 
                 inFile.close();
                 return true;
