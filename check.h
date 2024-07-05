@@ -31,5 +31,5 @@ int numin(){
 }
 
 void pagebreak(){
-    cout<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl;
+    system ("clear"); // for windows use system ("cls");
 }

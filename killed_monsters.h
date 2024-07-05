@@ -2,90 +2,66 @@
 #define KILLED_MONSTERS_H
 
 #include <iostream>
-#include <fstream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
-class KilledMonsterData {
+class KilledMonsters {
+private:
+    static const int MAX_MONSTERS = 100;
+    string killed_monsters[MAX_MONSTERS];
+    int count;
+
 public:
-    string name;
-    int hp;
-    int atk;
-    int def;
-    int sta;
-    int spd;
-    int lvl;
-
-    
-    KilledMonsterData() : name(""), hp(0), atk(0), def(0), sta(0), spd(0), lvl(0) {}
-
-    
-    KilledMonsterData(string n, int h, int a, int d, int s, int sp, int l) 
-        : name(n), hp(h), atk(a), def(d), sta(s), spd(sp), lvl(l) {}
+    KilledMonsters();
+    void addMonster(const string& monster);
+    void printKilledMonsters() const;
+    void saveToFile(const string& filename) const;
+    void loadFromFile(const string& filename);
 };
 
-void saveKilledMonsters(const KilledMonsterData* killedMonsters, int size) {
-    ofstream outFile("killed_monsters.txt");
+KilledMonsters::KilledMonsters() : count(0) {}
+
+void KilledMonsters::addMonster(const string& monster) {
+    if (count < MAX_MONSTERS) {
+        killed_monsters[count++] = monster;
+    } else {
+        cout << "Monster list is full!" << endl;
+    }
+}
+
+void KilledMonsters::printKilledMonsters() const {
+    for (int i = 0; i < count; ++i) {
+        cout << killed_monsters[i] << endl;
+    }
+}
+
+void KilledMonsters::saveToFile(const string& filename) const {
+    ofstream outFile(filename);
     if (outFile.is_open()) {
-        for (int i = 0; i < size; i++) {
-            outFile << killedMonsters[i].name << " "
-                    << killedMonsters[i].hp << " "
-                    << killedMonsters[i].atk << " "
-                    << killedMonsters[i].def << " "
-                    << killedMonsters[i].sta << " "
-                    << killedMonsters[i].spd << " "
-                    << killedMonsters[i].lvl << endl;
+        outFile << count << endl;
+        for (int i = 0; i < count; ++i) {
+            outFile << killed_monsters[i] << endl;
         }
         outFile.close();
     } else {
-        cerr << "Unable to open file for writing!" << endl;
+        cout << "Unable to open file for writing: " << filename << endl;
     }
 }
 
-KilledMonsterData* loadKilledMonsters(int &size) {
-    ifstream inFile("killed_monsters.txt");
-    if (!inFile.is_open()) {
-        cerr << "Unable to open file for reading!" << endl;
-        size = 0;
-        return nullptr;
-    }
-
-    size = 0;
-    string line;
-    while (getline(inFile, line)) {
-        size++;
-    }
-
-    KilledMonsterData* killedMonsters = new KilledMonsterData[size];
-    inFile.clear();
-    inFile.seekg(0, ios::beg);
-
-    int index = 0;
-    while (inFile >> killedMonsters[index].name 
-                  >> killedMonsters[index].hp 
-                  >> killedMonsters[index].atk 
-                  >> killedMonsters[index].def 
-                  >> killedMonsters[index].sta 
-                  >> killedMonsters[index].spd 
-                  >> killedMonsters[index].lvl) {
-        index++;
-    }
-
-    inFile.close();
-    return killedMonsters;
-}
-
-void displayKilledMonsters(const KilledMonsterData* killedMonsters, int size) {
-    for (int i = 0; i < size; i++) {
-        cout << "Name: " << killedMonsters[i].name
-             << ", HP: " << killedMonsters[i].hp
-             << ", ATK: " << killedMonsters[i].atk
-             << ", DEF: " << killedMonsters[i].def
-             << ", STA: " << killedMonsters[i].sta
-             << ", SPD: " << killedMonsters[i].spd
-             << ", LVL: " << killedMonsters[i].lvl << endl;
+void KilledMonsters::loadFromFile(const string& filename) {
+    ifstream inFile(filename);
+    if (inFile.is_open()) {
+        inFile >> count;
+        inFile.ignore(); // To ignore the newline character after count
+        for (int i = 0; i < count; ++i) {
+            getline(inFile, killed_monsters[i]);
+        }
+        inFile.close();
+    } else {
+        cout << "Unable to open file for reading: " << filename << endl;
     }
 }
 
-#endif 
+#endif // KILLED_MONSTERS_H
