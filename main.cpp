@@ -1,5 +1,9 @@
 #include <iostream>
 #include "check.h"
+#include "data_storage.h"
+#include <string>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 void displayMenu() {
@@ -22,125 +26,115 @@ void characterMenu() {
     cout << " \n";
     cout << "Select option: ";
 }
+
 // #1 start
 void startGame() {
     cout << "Starting the game...\n";
 }
+
 // #2 info
 void information() {
     cout << "";
     cout << "";
     cout << "";
 }
+
 // #3 upgrade
 void upgrade() {
     cout << "";
 }
+
 // #4 history
 void history() {
     cout << "";
 }
+
 // #5 save
 void save() {
     cout << "";
 }
+
 // #6 exit
-void exit() {
-    cout << "Quiting the game...\n";
+void exitGame() {
+    cout << "Quitting the game...\n";
     cout << "Good bye!\n";
 }
+
 // #7 intro
 void intro() {
     cout << "Long time ago...\n";
+    cout << "Press x to continue." << endl;
 }
+
 // #7 loading
 void loading() {
     cout << "Loading....\n";
 }
-// #8 new_character_selection
-void New() {
-    cout << " \n";
-    cout <<"Character: \n";
-    cout <<"slot 1" << endl;
-    cout <<"slot 2" << endl;
-    cout <<"slot 3" << endl;
-    cout <<"Select Character: "<< endl;
+
+// Clear screen function
+void clear() {
+#ifdef _WIN32
+    system("cls");
+#else
+    std::cout << "\033[2J\033[1;1H";
+#endif
 }
-
-void Delete() {
-    cout << " \n";
-    cout <<"Character: \n";
-    cout <<"slot 1" << endl;
-    cout <<"slot 2" << endl;
-    cout <<"slot 3" << endl;
-    cout <<"Select Character: "<< endl;
-}
-
-void Continue() {
-    cout << " \n";
-    cout <<"Character: \n";
-    cout <<"slot 1" << endl;
-    cout <<"slot 2" << endl;
-    cout <<"slot 3" << endl;
-    cout <<"Select Character: "<< endl;
-}
-
-
-
 
 int main() {
     int option;
     char chr;
-    do{
-        displayMenu();
-        cin>>option; // Get user input without echoing to the console
-        switch(option) {
+    DataStorage dataStorage;
+
+    displayMenu();
+    do {
+        cin >> option;
+        switch (option) {
             case 1:
-                pagebreak();
+                clear();
                 intro();
                 break;
             case 2:
-                exit();
-                break;
+                exitGame();
+                return 0;
             default:
                 cout << "Invalid option! Please try again.\n";
-
-        } 
-            } while(option<1||option>6);
-
-    cout<<"Press x to continue."<<endl;
-    do{
-        cin>>chr;
-        switch(chr){
-            case 'x':
-            pagebreak();
-            loading();
-            break;
-            default:
-                cout<< "Invalid character! Please try again.\n";
+                cout << "Select option: ";
         }
-    }while(chr!='x');
+    } while (option < 1 || option > 2);
 
-    do{
-        characterMenu();
-        cin>>option; // Get user input without echoing to the console
-        switch(option) {
+    do {
+        cin >> chr;
+        switch (chr) {
+            case 'x':
+                clear();
+                loading();
+                break;
+            default:
+                cout << "Invalid character! Please try again.\n";
+        }
+    } while (chr != 'x');
+
+    characterMenu();
+    while (true) {
+        cin >> option;
+        switch (option) {
             case 1:
-                New();
+                clear();
+                dataStorage.createNewCharacter();
+                dataStorage.displayPlayerData();
                 break;
             case 2:
-                Continue();
+                cout << "Continue option selected." << endl;
+                // Add logic to continue the game
                 break;
             case 3:
-                Delete();
+                cout << "Delete option selected." << endl;
+                // Add logic to delete a character
                 break;
             default:
-                cout << "Invalid option! Please try again.\n";
-
-        } 
-            } while(option<1||option>6);
-
-
+                cout << "Invalid option. Please select again." << endl;
+        }
+    }
 
     return 0;
 }
