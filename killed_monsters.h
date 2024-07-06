@@ -2,66 +2,92 @@
 #define KILLED_MONSTERS_H
 
 #include <iostream>
-#include <string>
 #include <fstream>
+#include <string>
 
 using namespace std;
 
-class KilledMonsters {
-private:
-    static const int MAX_MONSTERS = 100;
-    string killed_monsters[MAX_MONSTERS];
-    int count;
-
+class KilledMonsterData {
 public:
-    KilledMonsters();
-    void addMonster(const string& monster);
-    void printKilledMonsters() const;
-    void saveToFile() const;
-    void loadFromFile();
+    string name;
+    int hp;
+    int atk;
+    int def;
+    int sta;
+    int spd;
+    int lvl;
+
+    KilledMonsterData() : name(""), hp(0), atk(0), def(0), sta(0), spd(0), lvl(0) {}
+    KilledMonsterData(string n, int h, int a, int d, int s, int sp, int l) 
+        : name(n), hp(h), atk(a), def(d), sta(s), spd(sp), lvl(l) {}
+
+    void print() const {
+        cout << "Name: " << name << ", HP: " << hp << ", ATK: " << atk 
+             << ", DEF: " << def << ", STA: " << sta << ", SPD: " << spd 
+             << ", LVL: " << lvl << endl;
+    }
 };
 
-KilledMonsters::KilledMonsters() : count(0) {}
+class KilledMonsters {
+private:
+    static const int MAX_CAPACITY = 100; // Define maximum capacity
+    KilledMonsterData monsters[MAX_CAPACITY];
+    int size;
+    string playerName; // Add player name to uniquely identify their data file
 
-void KilledMonsters::addMonster(const string& monster) {
-    if (count < MAX_MONSTERS) {
-        killed_monsters[count++] = monster;
-    } else {
-        cout << "Monster list is full!" << endl;
-    }
-}
+public:
+    KilledMonsters(const string& player) : size(0), playerName(player) {}
 
-void KilledMonsters::printKilledMonsters() const {
-    for (int i = 0; i < count; ++i) {
-        cout << killed_monsters[i] << endl;
-    }
-}
-
-void KilledMonsters::saveToFile() const {
-    ofstream outFile("monsters.txt");
-    if (outFile.is_open()) {
-        outFile << count << endl;
-        for (int i = 0; i < count; ++i) {
-            outFile << killed_monsters[i] << endl;
+    void addMonster(const KilledMonsterData& monster) {
+        if (size < MAX_CAPACITY) {
+            monsters[size++] = monster;
+        } else {
+            cerr << "KilledMonsters storage is full!" << endl;
         }
-        outFile.close();
-    } else {
-        cout << "Unable to open file for writing: monsters.txt" << endl;
     }
-}
 
-void KilledMonsters::loadFromFile() {
-    ifstream inFile("monsters.txt");
-    if (inFile.is_open()) {
-        inFile >> count;
-        inFile.ignore(); // To ignore the newline character after count
-        for (int i = 0; i < count; ++i) {
-            getline(inFile, killed_monsters[i]);
+    void saveToFile() {
+        ofstream outFile(playerName + "_monsters_archive.txt");
+        if (outFile.is_open()) {
+            for (int i = 0; i < size; i++) {
+                outFile << monsters[i].name << " "
+                        << monsters[i].hp << " "
+                        << monsters[i].atk << " "
+                        << monsters[i].def << " "
+                        << monsters[i].sta << " "
+                        << monsters[i].spd << " "
+                        << monsters[i].lvl << endl;
+            }
+            outFile.close();
+        } else {
+            cerr << "Unable to open file for writing!" << endl;
         }
-        inFile.close();
-    } else {
-        cout << "Unable to open file for reading: monsters.txt" << endl;
     }
-}
+
+    void loadFromFile() {
+        ifstream inFile(playerName + "_monsters_archive.txt");
+        if (inFile.is_open()) {
+            size = 0;
+            while (!inFile.eof() && size < MAX_CAPACITY) {
+                KilledMonsterData monster;
+                inFile >> monster.name >> monster.hp >> monster.atk >> monster.def 
+                       >> monster.sta >> monster.spd >> monster.lvl;
+                if (inFile.fail()) {
+                    break;
+                }
+                addMonster(monster);
+            }
+            inFile.close();
+        } else {
+            cerr << "Unable to open file for reading!" << endl;
+        }
+    }
+
+    void display() const {
+        for (int i = 0; i < size; i++) {
+            monsters[i].print();
+        }
+    }
+};
 
 #endif // KILLED_MONSTERS_H
