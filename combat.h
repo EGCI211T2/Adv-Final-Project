@@ -8,15 +8,13 @@ using namespace std;
 class monster{
 private:
     string name;
-    int hp,atk,def,sta,spd,lvl=1,exp=0,upoint;
+    int hp,atk,def,sta,spd,exp=0,upoint;
 public:
     void statt();
     int gethp();
     int getsta();
-    int getlvl();
     int getspd();
     void upgrade();
-    void level(int x);
     int nattack(monster x);
     int sattack(monster x);
     int cattack(monster x,int s);
@@ -40,21 +38,11 @@ monster::monster (string n, int h, int a, int d,int st, int sp)
 }
 void monster::statt(){
     cout<<"Name: "<<name<<endl;
-    cout<<"Level: "<<lvl<<endl;
     cout<<"HP: "<<hp<<endl;
     cout<<"Stamina: "<<sta<<endl;
     cout<<"Speed: "<<spd<<endl;
     cout<<"Attack: "<<atk<<endl;
     cout<<"Defense: "<<def<<endl;
-}
-void monster::level(int x){
-    int l=lvl,req=250;
-    exp+=x;
-    while(exp>=(req*lvl)){
-    exp-=(req*lvl);
-    lvl++;
-    }
-upoint+=(lvl-l)*3;
 }
 
  int monster::gethp(){
@@ -63,19 +51,13 @@ upoint+=(lvl-l)*3;
  int monster::getsta(){
         return sta;
     }
-    int monster::getlvl(){
-        return lvl;
-    }
 int monster::getspd(){
     return spd;
 }
 void monster::upgrade(){
-    int c;
-    if(upoint<=0){
-        cout<<"You don't have any upgrade point!!"<<endl;
-    }
-    else {
-        while(upoint>0&&c!=0){
+  int c;
+  upoint=3;
+        do{
             cout<<"Upgrade Point: "<<upoint<<endl;
             cout<<"Stats lists:"<<endl;
             cout<<"1.HP: "<<hp<<endl;
@@ -83,39 +65,41 @@ void monster::upgrade(){
             cout<<"3.Speed: "<<spd<<endl;
             cout<<"4.Attack: "<<atk<<endl;
             cout<<"5.Defense: "<<def<<endl;
-            cout<<"0.Back"<<endl;
             cout<<"Choose stats to upgrade: ";
             c=numin();
-            if(c<0||c>5){
+            if(c<1||c>5){
                 cout<<"Please choose number in the list."<<endl;
                 continue;
             }
             else{
                 switch (c){
-                case 0:
-                        break;
-                
                 case 1:
                     hp+=5;
-                
+                    upoint--;
+                    break;
                 case 2:
                     sta+=2;
-                
+                    upoint--;
+                    break;
                 case 3:
                     spd++;
-                
+                    upoint--;
+                    break;
                 case 4:
                     atk++;
-                
+                    upoint--;
+                break;
                 case 5:
                     def++;
-                
+                    upoint--;
+                    break;
             }
             }
             
-        }
+        }while(upoint!=0);
     }
-}
+    
+
 int monster::sattack(monster x){
     int p=rand()%4;
     if(p==0){
@@ -177,7 +161,7 @@ monster::~monster()
 }
 
 void monster::battle(monster a, monster b){
- int ahp=a.gethp(),asta=a.getsta(),alvl=a.getlvl(),aspd=a.getspd(),bhp=b.gethp(),blvl=b.getlvl(),bspd=b.getspd();
+ int ahp=a.gethp(),asta=a.getsta(),aspd=a.getspd(),bhp=b.gethp(),bspd=b.getspd();
     int ea=asta/2, c;
     int turn=0;
     int heal;
@@ -193,11 +177,11 @@ do{
     int aatk=0,adef,batk=0,bdef,af,bf;
     cout<<"----------------------------------"<<endl;
     cout<<a.name<<endl;
-    cout<<"HP: "<<ahp<<"  Level: "<<alvl<<"  Speed: "<<aspd<<endl;
+    cout<<"HP: "<<ahp<<"  Speed: "<<aspd<<endl;
     cout<<"Energy: "<<ea<<endl;
     cout<<"----------------------------------"<<endl;
     cout<<b.name<<endl;
-    cout<<"HP: "<<bhp<<"  Level: "<<blvl<<"  Speed: "<<bspd<<endl;
+    cout<<"HP: "<<bhp<<"  Speed: "<<bspd<<endl;
     cout<<"----------------------------------"<<endl;
     cout<<"Choose the action: "<<endl;
     cout<<"1.Normal Attack"<<endl;
