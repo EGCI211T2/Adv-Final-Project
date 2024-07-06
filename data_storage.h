@@ -1,5 +1,5 @@
-#ifndef DATA_STORAGE_H
-#define DATA_STORAGE_H
+#ifndef KILLED_MONSTERS_H
+#define KILLED_MONSTERS_H
 
 #include <iostream>
 #include <fstream>
@@ -7,42 +7,74 @@
 
 using namespace std;
 
-class PlayerData {
+class KilledMonsterData {
 public:
-    string playerName;
-    int playerScore;
+    string name;
+    int hp;
+    int atk;
+    int def;
+    int sta;
+    int spd;
+    int lvl;
 
-    PlayerData() : playerName(""), playerScore(0) {}
-    PlayerData(string name, int score) : playerName(name), playerScore(score) {}
+    KilledMonsterData() : name(""), hp(0), atk(0), def(0), sta(0), spd(0), lvl(0) {}
+    KilledMonsterData(string n, int h, int a, int d, int s, int sp, int l) 
+        : name(n), hp(h), atk(a), def(d), sta(s), spd(sp), lvl(l) {}
 
     void print() const {
-        cout << "Player Name: " << playerName << ", Player Score: " << playerScore << endl;
+        cout << "Name: " << name << ", HP: " << hp << ", ATK: " << atk 
+             << ", DEF: " << def << ", STA: " << sta << ", SPD: " << spd 
+             << ", LVL: " << lvl << endl;
     }
 };
 
-class DataStorage {
-private:
-    static const int MAX_CAPACITY = 50; // Define maximum capacity
-    PlayerData players[MAX_CAPACITY];
-    int size;
-    string playerName; // Add player name to uniquely identify their data file
-
+class KilledMonsterNode {
 public:
-    DataStorage(const string& player) : size(0), playerName(player) {}
+    KilledMonsterData data;
+    KilledMonsterNode* next;
 
-    void addPlayer(const PlayerData& player) {
-        if (size < MAX_CAPACITY) {
-            players[size++] = player;
-        } else {
-            cerr << "DataStorage is full!" << endl;
+    KilledMonsterNode(KilledMonsterData m) : data(m), next(nullptr) {}
+};
+
+class KilledMonsters {
+private:
+    KilledMonsterNode* head;
+    string playerName;
+
+    void clearList() {
+        while (head) {
+            KilledMonsterNode* temp = head;
+            head = head->next;
+            delete temp;
         }
     }
 
+public:
+    KilledMonsters(const string& player) : head(nullptr), playerName(player) {}
+
+    ~KilledMonsters() {
+        clearList();
+    }
+
+    void addMonster(const KilledMonsterData& monster) {
+        KilledMonsterNode* newNode = new KilledMonsterNode(monster);
+        newNode->next = head;
+        head = newNode;
+    }
+
     void saveToFile() {
-        ofstream outFile(playerName + "_player_info.txt");
+        ofstream outFile(playerName + "_monsters_archive.txt", ios::app);
         if (outFile.is_open()) {
-            for (int i = 0; i < size; i++) {
-                outFile << players[i].playerName << " " << players[i].playerScore << endl;
+            KilledMonsterNode* current = head;
+            while (current) {
+                outFile << current->data.name << " "
+                        << current->data.hp << " "
+                        << current->data.atk << " "
+                        << current->data.def << " "
+                        << current->data.sta << " "
+                        << current->data.spd << " "
+                        << current->data.lvl << endl;
+                current = current->next;
             }
             outFile.close();
         } else {
@@ -51,16 +83,17 @@ public:
     }
 
     void loadFromFile() {
-        ifstream inFile(playerName + "_player_info.txt");
+        clearList();
+        ifstream inFile(playerName + "_monsters_archive.txt");
         if (inFile.is_open()) {
-            size = 0;
-            while (!inFile.eof() && size < MAX_CAPACITY) {
-                PlayerData player;
-                inFile >> player.playerName >> player.playerScore;
+            while (!inFile.eof()) {
+                KilledMonsterData monster;
+                inFile >> monster.name >> monster.hp >> monster.atk >> monster.def 
+                       >> monster.sta >> monster.spd >> monster.lvl;
                 if (inFile.fail()) {
                     break;
                 }
-                addPlayer(player);
+                addMonster(monster);
             }
             inFile.close();
         } else {
@@ -69,10 +102,17 @@ public:
     }
 
     void display() const {
-        for (int i = 0; i < size; i++) {
-            players[i].print();
+        KilledMonsterNode* current = head;
+        while (current) {
+            current->data.print();
+            current = current->next;
         }
+    }
+
+    void clearNodes() {
+        saveToFile();
+        clearList();
     }
 };
 
-#endif // DATA_STORAGE_H
+#endif // KILLED_MONSTERS_H

@@ -28,35 +28,53 @@ public:
     }
 };
 
+class KilledMonsterNode {
+public:
+    KilledMonsterData data;
+    KilledMonsterNode* next;
+
+    KilledMonsterNode(KilledMonsterData m) : data(m), next(nullptr) {}
+};
+
 class KilledMonsters {
 private:
-    static const int MAX_CAPACITY = 100; // Define maximum capacity
-    KilledMonsterData monsters[MAX_CAPACITY];
-    int size;
-    string playerName; // Add player name to uniquely identify their data file
+    KilledMonsterNode* head;
+    string playerName;
 
-public:
-    KilledMonsters(const string& player) : size(0), playerName(player) {}
-
-    void addMonster(const KilledMonsterData& monster) {
-        if (size < MAX_CAPACITY) {
-            monsters[size++] = monster;
-        } else {
-            cerr << "KilledMonsters storage is full!" << endl;
+    void clearList() {
+        while (head) {
+            KilledMonsterNode* temp = head;
+            head = head->next;
+            delete temp;
         }
     }
 
+public:
+    KilledMonsters(const string& player) : head(nullptr), playerName(player) {}
+
+    ~KilledMonsters() {
+        clearList();
+    }
+
+    void addMonster(const KilledMonsterData& monster) {
+        KilledMonsterNode* newNode = new KilledMonsterNode(monster);
+        newNode->next = head;
+        head = newNode;
+    }
+
     void saveToFile() {
-        ofstream outFile(playerName + "_monsters_archive.txt");
+        ofstream outFile(playerName + "_monsters_archive.txt", ios::app);
         if (outFile.is_open()) {
-            for (int i = 0; i < size; i++) {
-                outFile << monsters[i].name << " "
-                        << monsters[i].hp << " "
-                        << monsters[i].atk << " "
-                        << monsters[i].def << " "
-                        << monsters[i].sta << " "
-                        << monsters[i].spd << " "
-                        << monsters[i].lvl << endl;
+            KilledMonsterNode* current = head;
+            while (current) {
+                outFile << current->data.name << " "
+                        << current->data.hp << " "
+                        << current->data.atk << " "
+                        << current->data.def << " "
+                        << current->data.sta << " "
+                        << current->data.spd << " "
+                        << current->data.lvl << endl;
+                current = current->next;
             }
             outFile.close();
         } else {
@@ -65,10 +83,10 @@ public:
     }
 
     void loadFromFile() {
+        clearList();
         ifstream inFile(playerName + "_monsters_archive.txt");
         if (inFile.is_open()) {
-            size = 0;
-            while (!inFile.eof() && size < MAX_CAPACITY) {
+            while (!inFile.eof()) {
                 KilledMonsterData monster;
                 inFile >> monster.name >> monster.hp >> monster.atk >> monster.def 
                        >> monster.sta >> monster.spd >> monster.lvl;
@@ -84,9 +102,16 @@ public:
     }
 
     void display() const {
-        for (int i = 0; i < size; i++) {
-            monsters[i].print();
+        KilledMonsterNode* current = head;
+        while (current) {
+            current->data.print();
+            current = current->next;
         }
+    }
+
+    void clearNodes() {
+        saveToFile();
+        clearList();
     }
 };
 

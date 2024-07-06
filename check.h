@@ -31,5 +31,5 @@ int numin(){
 }
 
 void pagebreak(){
-    system ("cls"); //for mac use system("clear");
+    system ("clear"); //for mac use system("clear");
 }
