@@ -922,6 +922,242 @@ do{
        }
 
        }
+    case 4:
+     if(bspd>aspd){
+            switch (bc)
+            {
+            case 1:
+                batk=b.nattack(a);
+                adef=a.defend();
+                bf=batk-adef;
+                if(bf<0){
+                    bf=0;
+                }
+                if(bf>0&&batk!=0)
+                {
+                    ahp-=bf;
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    if(ahp<0)
+                    {
+                    ahp=0;
+                    }
+                    if(ahp>0){
+                    cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<a.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                else if(bf==0&&batk!=0) {
+                    cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                }
+            case 2:
+            heal=b.gethp()/10;
+                bhp+=heal;
+                if(bhp>=b.gethp())
+                {
+                    bhp=b.gethp();
+                }
+                cout<<b.name<<" heals 10 percent of its HP."<<endl;
+            adef=defend();
+            case 3:
+            bdef=b.defend();
+            adef=a.defend();
+        
+            }
+        }
+        else{
+            switch (bc)
+            {
+            case 1:
+                adef=a.defend();
+                batk=b.nattack(a);
+                bf=batk-adef;
+                if(bf<0){
+                    bf=0;
+                }
+                if(bf>0&&batk!=0)
+                {
+                    ahp-=bf;
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    if(ahp<0)
+                    {
+                    ahp=0;
+                    }
+                    if(ahp>0){
+                    cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<a.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                else if(bf==0&&batk!=0) {
+                    cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                }
+            case 2:
+            adef=defend();
+            heal=b.gethp()/10;
+                bhp+=heal;
+                if(bhp>=b.gethp())
+                {
+                    bhp=b.gethp();
+                }
+                cout<<b.name<<" heals 10 percent of its HP."<<endl;
+            case 3:
+            adef=a.defend();
+            bdef=b.defend();
+        
+            }
+        }
+    case 5:
+    if(bspd>aspd){
+            switch (bc)
+            {
+            case 1:
+                batk=b.nattack(a);
+                adef=a.ndefend();
+                bf=batk-adef;
+                if(bf<0){
+                    bf=0;
+                }
+                if(bf>0&&batk!=0)
+                {
+                    ahp-=bf;
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    if(ahp<0)
+                    {
+                    ahp=0;
+                    }
+                    if(ahp>0){
+                    cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<a.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                else if(bf==0&&batk!=0) {
+                    cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                }
+                heal=a.gethp()/10;
+                ahp+=heal;
+                if(ahp>=a.gethp())
+                {
+                    ahp=a.gethp();
+                }
+                 if(ahp==a.gethp()){
+                    cout<<a.name<<"now has a full HP."<<endl;
+                }
+                else{
+                cout<<a.name<<" heals 10 percent of its HP."<<endl;
+                }
+            case 2:
+            heal=b.gethp()/10;
+                bhp+=heal;
+                if(bhp>=b.gethp())
+                {
+                    bhp=b.gethp();
+                }
+                if(bhp==b.gethp()){
+                    cout<<b.name<<"now has a full HP."<<endl;
+                }
+                else{
+                cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                }
+                heal=a.gethp()/10;
+                ahp+=heal;
+                if(ahp>=a.gethp())
+                {
+                    ahp=a.gethp();
+                }
+                 if(ahp==a.gethp()){
+                    cout<<a.name<<"now has a full HP."<<endl;
+                }
+                else{
+                cout<<a.name<<" heals 10 percent of its HP."<<endl;
+                }
+            case 3:
+            bdef=b.defend();
+              heal=a.gethp()/10;
+                ahp+=heal;
+                if(ahp>=a.gethp())
+                {
+                    ahp=a.gethp();
+                }
+                 if(ahp==a.gethp()){
+                    cout<<a.name<<"now has a full HP."<<endl;
+                }
+                else{
+                cout<<a.name<<" heals 10 percent of its HP."<<endl;
+                }
+            }
+    }
+    else{
+        heal=a.gethp()/10;
+                ahp+=heal;
+                if(ahp>=a.gethp())
+                {
+                    ahp=a.gethp();
+                }
+                 if(ahp==a.gethp()){
+                    cout<<a.name<<"now has a full HP."<<endl;
+                }
+                else{
+                cout<<a.name<<" heals 10 percent of its HP."<<endl;
+                }
+            switch (bc)
+            {
+            case 1:
+                batk=b.nattack(a);
+                adef=a.ndefend();
+                bf=batk-adef;
+                if(bf<0){
+                    bf=0;
+                }
+                if(bf>0&&batk!=0)
+                {
+                    ahp-=bf;
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    if(ahp<0)
+                    {
+                    ahp=0;
+                    }
+                    if(ahp>0){
+                    cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    }
+                    else{
+                        cout<<a.name<<" is dead."<<endl;
+                        break;
+                    }
+                    
+                }
+                else if(bf==0&&batk!=0) {
+                    cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                }
+                
+            case 2:
+            heal=b.gethp()/10;
+                bhp+=heal;
+                if(bhp>=b.gethp())
+                {
+                    bhp=b.gethp();
+                }
+                if(bhp==b.gethp()){
+                    cout<<b.name<<"now has a full HP."<<endl;
+                }
+                else{
+                cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                }
+            case 3:
+            bdef=b.defend();
+             
+            }
+    }
     }
 
     
