@@ -6,9 +6,13 @@ using namespace std;
 
 int main()
 {
+    char*x;
+    x=new char[20];
+    cout<<"Enter monster name ";
+    cin>>x;
     srand(time(NULL));
-    monster A("test",100,10,10,20,5);
-    monster B("yeah",100,10,10,20,5);
+    monster A(x,20,1,1,5,1);
+    monster B("Purikuuu",30,2,2,10,2);
     A.upgrade();
     A.battle(A,B);
 }

@@ -1,6 +1,7 @@
 #define combat_h
 #include <iostream>
 using namespace std;
+#include <iomanip>
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,12 +9,14 @@ using namespace std;
 class monster{
 private:
     string name;
-    int hp,atk,def,sta,spd,exp=0,upoint;
+    int hp,atk,def,sta,spd,upoint;
 public:
     void statt();
     int gethp();
     int getsta();
     int getspd();
+    int getatk();
+    int getdef();
     void upgrade();
     int nattack(monster x);
     int sattack(monster x);
@@ -34,7 +37,6 @@ monster::monster (string n, int h, int a, int d,int st, int sp)
     def=d;
     sta=st;
     spd=sp;
-    cout<<name<<" is a monster"<<endl;
 }
 void monster::statt(){
     cout<<"Name: "<<name<<endl;
@@ -54,10 +56,18 @@ void monster::statt(){
 int monster::getspd(){
     return spd;
 }
+int monster::getatk(){
+    return atk;
+}
+int monster::getdef(){
+    return def;
+}
 void monster::upgrade(){
   int c;
   upoint=3;
         do{
+            system("clear");
+            cout<<"Name: "<<name<<endl;
             cout<<"Upgrade Point: "<<upoint<<endl;
             cout<<"Stats lists:"<<endl;
             cout<<"1.HP: "<<hp<<endl;
@@ -161,10 +171,11 @@ monster::~monster()
 }
 
 void monster::battle(monster a, monster b){
- int ahp=a.gethp(),asta=a.getsta(),aspd=a.getspd(),bhp=b.gethp(),bspd=b.getspd();
+ int ahp=a.gethp(),asta=a.getsta(),aspd=a.getspd(),bhp=b.gethp(),bspd=b.getspd(),ba=b.getatk(),bd=b.getdef();
     int ea=asta/2, c;
     int turn=0;
     int heal;
+    system("clear");
 do{
     if(turn>0){
         ea+=2;
@@ -173,15 +184,29 @@ do{
         }
     }
     turn++;
-    int bc=rand()%3+1;
+    int bb=rand()%10+1;
+    int bc;
+    if(bb<6)
+    {
+    bc=1;
+    }
+    else if(bb<9)
+    {
+        bc=2;
+    }
+    else{
+        bc=3;
+    }
     int aatk=0,adef,batk=0,bdef,af,bf;
     cout<<"----------------------------------"<<endl;
     cout<<a.name<<endl;
-    cout<<"HP: "<<ahp<<"  Speed: "<<aspd<<endl;
+    cout<<"HP  : "<<setw(5)<<ahp<<"  Speed : "<<setw(5)<<spd<<endl;
+    cout<<"Atk : "<<setw(5)<<atk<<"  Defend: "<<setw(5)<<def<<endl;
     cout<<"Energy: "<<ea<<endl;
     cout<<"----------------------------------"<<endl;
     cout<<b.name<<endl;
-    cout<<"HP: "<<bhp<<"  Speed: "<<bspd<<endl;
+    cout<<"HP. : "<<setw(5)<<bhp<<"  Speed : "<<setw(5)<<bspd<<endl;
+    cout<<"Atk : "<<setw(5)<<ba<<"  Defend: "<<setw(5)<<bd<<endl;
     cout<<"----------------------------------"<<endl;
     cout<<"Choose the action: "<<endl;
     cout<<"1.Normal Attack"<<endl;
@@ -190,6 +215,7 @@ do{
     cout<<"4.Protect"<<endl;
     cout<<"5.Restore"<<endl;
     do{
+    cout<<":";
     c=numin();
     if(c<1||c>5)
     {
@@ -201,6 +227,7 @@ do{
     if(ea<1)
     {
         cout<<name<<" has not enough energy!"<<endl;
+        ea-=2;
         break;
     }
     else{
@@ -451,6 +478,7 @@ do{
     if(ea<4)
     {
         cout<<name<<" has not enough energy!"<<endl;
+        ea-=2;
         break;
     }
     else{
@@ -701,6 +729,7 @@ do{
     if(ea==0)
     {
         cout<<name<<" has not enough energy!"<<endl;
+        ea-=2;
         break;
     }
     else{
@@ -957,6 +986,7 @@ do{
     if(ea<2)
     {
         cout<<name<<" has not enough energy!"<<endl;
+        ea-=2;
         break;
     }
     else{
@@ -1062,6 +1092,7 @@ do{
     if(ea<2)
     {
         cout<<name<<" has not enough energy!"<<endl;
+        ea-=2;
         break;
     }
     else{
