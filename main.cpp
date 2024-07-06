@@ -4,6 +4,7 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include "combat.h"
 using namespace std;
 
 void displayMenu() {
@@ -11,17 +12,14 @@ void displayMenu() {
     cout << "|                             |\n";
     cout << "|    Defender of the World    |\n";
     cout << "|_____________________________|\n";
-    cout << "1. Start Game\n";
-    cout << "2. Quit\n";
-    cout << "Select option: ";
+    cout << "press x to continue" << endl;
 }
 
 void characterMenu() {
     cout << " _______________________________ \n";
     cout << "|                               |\n";
-    cout << "|          1.New                |\n";
-    cout << "|          2.Continue           |\n";
-    cout << "|          3.Delete             |\n";
+    cout << "|          1.Play               |\n";
+    cout << "|          2.Exit               |\n";
     cout << "|_______________________________|\n";
     cout << " \n";
     cout << "Select option: ";
@@ -81,26 +79,26 @@ void clear() {
 }
 
 int main() {
-    int option;
+    char option;
     char chr;
+    int no;
+    char * name1 = new char[50];
+    char* mon[100] = {"Gorgath", "Zoltar", "Draknor", "Morthog", "Blazebane", "Thundersnout", "Venomclaw", "Shadowfang", "Grimscale", "Bonecrusher", "Frostbite", "Ironhide", "Scalebeard", "Bloodfang", "Wraithhorn", "Diremaw", "Bramblebeast", "Nightstalker", "Dreadnought", "Stormcaller", "Voidreaver", "Deathshade", "Pyroclasm", "Ravager", "Lichlord", "Carnifex", "Ghoulbane", "Netherfiend", "Warbringer", "Doomclaw", "Basilisk", "Hellhound", "Plaguemaw", "Corpsegrinder", "Nightmarer", "Firefang", "Darkseer", "Warlock", "Cryptkeeper", "Charnel", "Abyssal", "Skullduggery", "Harbinger", "Deathbringer", "Maleficent", "Bloodlust", "Dracolich", "Wyrmkin", "Titanclaw", "Venomspike", "Spiteful", "Miasma", "Phantasm", "Direwolf", "Hellfire", "Thunderclap", "Ashenfang", "Razorclaw", "Doomshade", "Grimreaper", "Stormwrath", "Bonegnasher", "Darkbane", "Wraithwalker", "Venomlord", "Skulldrinker", "Bloodreaver", "Shadowstalker", "Frostclaw", "Ironfist", "Scalethorn", "Bloodscream", "Wraithscream", "Direfang", "Brambleclaw", "Nightshade", "Dreadclaw", "Stormfury", "Voidwalker", "Deathhowl", "Pyrofang", "Ravager", "Lichbane", "Carnage", "Ghoulclaw", "Netherlord", "Warhowl", "Doomgaze", "Basiliskfang", "Hellclaw", "Plaguebringer", "Corpseclaw", "Nightmare", "Firemaw", "Darkclaw", "Warlock", "Cryptlord", "Charred", "Abysswalker", "Skullcrusher"};
+
     DataStorage dataStorage;
 
     displayMenu();
     do {
         cin >> option;
         switch (option) {
-            case 1:
+            case 'x':
                 clear();
                 intro();
                 break;
-            case 2:
-                exitGame();
-                return 0;
             default:
                 cout << "Invalid option! Please try again.\n";
-                cout << "Select option: ";
         }
-    } while (option < 1 || option > 2);
+    } while (option!='x');
 
     do {
         cin >> chr;
@@ -115,26 +113,29 @@ int main() {
     } while (chr != 'x');
 
     characterMenu();
-    while (true) {
-        cin >> option;
-        switch (option) {
+    do{
+        no = numin();
+        switch (no) {
             case 1:
                 clear();
-                dataStorage.createNewCharacter();
-                dataStorage.displayPlayerData();
+                cout<<"Enter player name: ";
+                cin>>name1;
+                cout<<name1;
+                //dataStorage.createNewCharacter();
+                //dataStorage.displayPlayerData();
                 break;
             case 2:
-                cout << "Continue option selected." << endl;
+                cout << "Leaving the game" << endl;
                 // Add logic to continue the game
-                break;
-            case 3:
-                cout << "Delete option selected." << endl;
-                // Add logic to delete a character
                 break;
             default:
                 cout << "Invalid option. Please select again." << endl;
         }
-    }
+    } while(no<1||no>2);
+
+    monster A(name1);
+    monster B(mon[1]);
+    A.upgrade();A.battle(A,B);
 
     return 0;
 }
