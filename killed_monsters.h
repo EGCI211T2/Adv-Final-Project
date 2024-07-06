@@ -2,117 +2,94 @@
 #define KILLED_MONSTERS_H
 
 #include <iostream>
-#include <fstream>
-#include <string>
+#include <cstring>
 
 using namespace std;
 
-class KilledMonsterData {
-public:
-    string name;
-    int hp;
-    int atk;
-    int def;
-    int sta;
-    int spd;
-    int lvl;
+struct KilledMonster {
+    char name[50];
+    int count;
 
-    KilledMonsterData() : name(""), hp(0), atk(0), def(0), sta(0), spd(0), lvl(0) {}
-    KilledMonsterData(string n, int h, int a, int d, int s, int sp, int l) 
-        : name(n), hp(h), atk(a), def(d), sta(s), spd(sp), lvl(l) {}
+    KilledMonster(const char* n, int c) {
+        strncpy(name, n, 50);
+        count = c;
+    }
 
-    void print() const {
-        cout << "Name: " << name << ", HP: " << hp << ", ATK: " << atk 
-             << ", DEF: " << def << ", STA: " << sta << ", SPD: " << spd 
-             << ", LVL: " << lvl << endl;
+    KilledMonster() {
+        strncpy(name, "", 50);
+        count = 0;
     }
 };
 
-class KilledMonsterNode {
+class Node {
+private:
+    KilledMonster value;
+    Node *nextPtr;
 public:
-    KilledMonsterData data;
-    KilledMonsterNode* next;
-
-    KilledMonsterNode(KilledMonsterData m) : data(m), next(nullptr) {}
+    Node(KilledMonster v) : value(v), nextPtr(nullptr) {}
+    void setNext(Node* next) { nextPtr = next; }
+    Node* getNext() const { return nextPtr; }
+    KilledMonster getValue() const { return value; }
 };
+
+typedef Node* NodePtr;
 
 class KilledMonsters {
-private:
-    KilledMonsterNode* head;
-    string playerName;
-
-    void clearList() {
-        while (head) {
-            KilledMonsterNode* temp = head;
-            head = head->next;
-            delete temp;
-        }
-    }
-
+    NodePtr top;
+    int size;
 public:
-    KilledMonsters(const string& player) : head(nullptr), playerName(player) {}
-
-    ~KilledMonsters() {
-        clearList();
-    }
-
-    void addMonster(const KilledMonsterData& monster) {
-        KilledMonsterNode* newNode = new KilledMonsterNode(monster);
-        newNode->next = head;
-        head = newNode;
-    }
-
-    void saveToFile() {
-        ofstream outFile(playerName + "_monsters_archive.txt", ios::app);
-        if (outFile.is_open()) {
-            KilledMonsterNode* current = head;
-            while (current) {
-                outFile << current->data.name << " "
-                        << current->data.hp << " "
-                        << current->data.atk << " "
-                        << current->data.def << " "
-                        << current->data.sta << " "
-                        << current->data.spd << " "
-                        << current->data.lvl << endl;
-                current = current->next;
-            }
-            outFile.close();
-        } else {
-            cerr << "Unable to open file for writing!" << endl;
-        }
-    }
-
-    void loadFromFile() {
-        clearList();
-        ifstream inFile(playerName + "_monsters_archive.txt");
-        if (inFile.is_open()) {
-            while (!inFile.eof()) {
-                KilledMonsterData monster;
-                inFile >> monster.name >> monster.hp >> monster.atk >> monster.def 
-                       >> monster.sta >> monster.spd >> monster.lvl;
-                if (inFile.fail()) {
-                    break;
-                }
-                addMonster(monster);
-            }
-            inFile.close();
-        } else {
-            cerr << "Unable to open file for reading!" << endl;
-        }
-    }
-
-    void display() const {
-        KilledMonsterNode* current = head;
-        while (current) {
-            current->data.print();
-            current = current->next;
-        }
-    }
-
-    void clearNodes() {
-        saveToFile();
-        clearList();
-    }
+    void addKilledMonster(const char*, int);
+    int getTotalKills() const;
+    void displayKilledMonsters() const;
+    KilledMonsters();
+    ~KilledMonsters();
+    bool isEmpty() const;
 };
+
+void KilledMonsters::addKilledMonster(const char* name, int count) {
+    NodePtr new_node = new Node(KilledMonster(name, count));
+    if (new_node) {
+        new_node->setNext(top);
+        top = new_node;
+        ++size;
+    } else {
+        cout << "No more memory left" << endl;
+    }
+}
+
+int KilledMonsters::getTotalKills() const {
+    int totalKills = 0;
+    NodePtr current = top;
+    while (current != nullptr) {
+        totalKills += current->getValue().count;
+        current = current->getNext();
+    }
+    return totalKills;
+}
+
+void KilledMonsters::displayKilledMonsters() const {
+    cout << "Killed Monsters:\n";
+    NodePtr current = top;
+    while (current != nullptr) {
+        cout << current->getValue().name << ": " << current->getValue().count << "\n";
+        current = current->getNext();
+    }
+}
+
+KilledMonsters::KilledMonsters() : top(nullptr), size(0) {}
+
+KilledMonsters::~KilledMonsters() {
+    cout << "Clearing the killed monsters list" << endl;
+    while (size > 0) {
+        NodePtr temp = top;
+        top = top->getNext();
+        delete temp;
+        --size;
+    }
+}
+
+bool KilledMonsters::isEmpty() const {
+    return top == nullptr;
+}
 
 #endif // KILLED_MONSTERS_H

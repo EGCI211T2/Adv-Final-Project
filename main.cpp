@@ -86,6 +86,8 @@ void Continue() {
 }
 
 
+
+
 int main() {
     int option;
     char chr;
@@ -104,7 +106,7 @@ int main() {
                 cout << "Invalid option! Please try again.\n";
 
         } 
-    } while(option<1||option>6);
+            } while(option<1||option>6);
 
     cout<<"Press x to continue."<<endl;
     do{
@@ -136,7 +138,9 @@ int main() {
                 cout << "Invalid option! Please try again.\n";
 
         } 
-    } while(option<1||option>6);
+            } while(option<1||option>6);
+
+
 
     return 0;
 }
