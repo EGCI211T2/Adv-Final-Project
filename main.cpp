@@ -134,7 +134,7 @@ int main() {
     } while(no<1||no>2);
 
     monster A(name1);
-    monster B(mon[1]);
+    monster B(mon[55]);
     A.upgrade();A.battle(A,B);
 
     return 0;

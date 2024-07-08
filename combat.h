@@ -5,6 +5,7 @@ using namespace std;
 #include <time.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 class monster{
 private:
@@ -114,55 +115,66 @@ int monster::sattack(monster x){
     int p=rand()%4;
     if(p==0){
         cout<<name<<" miss the special attack."<<endl;
+        sleep(2);
         return 0;
     }
     else if(p<3){
         cout<<name<<" attacks "<<x.name<<" "<<atk*3<<" damage."<<endl;
+         sleep(2);
         return atk*3;
     }
     else{
         cout<<"Critical hit!!!"<<endl;
+        sleep(2);
         cout<<name<<" attacks "<<x.name<<" "<<atk*5<<" damage."<<endl;
+         sleep(2);
         return atk*5;
     }
-
 }
 int monster::nattack(monster x){
     int p=rand()%4;
     if(p==0){
         cout<<name<<" miss the attack."<<endl;
+         sleep(2);
         return 0;
     }
     else if(p<3){
         cout<<name<<" attacks "<<x.name<<" "<<atk<<" damage."<<endl;
+         sleep(2);
         return atk;
     }
     else{
        cout<<"Critical hit!!!"<<endl;
+        sleep(2);
         cout<<name<<" attacks "<<x.name<<" "<<atk*2<<" damage."<<endl;
+         sleep(2);
         return atk*2;
     }
+
 }
 int monster::cattack(monster x,int s){
     int p=rand()%4;
     if(p==0){
         cout<<name<<" miss the charge attack."<<endl;
+         sleep(2);
         return 0;
     }
     else {
         cout<<name<<" attacks "<<x.name<<" "<<atk*s<<" damage."<<endl;
+         sleep(2);
         return atk*s;
     }
-
 }
 int monster::ndefend(){
     int x =(def/10)*(rand()%10+1);
     cout<<name<<" defends "<<x<<" damage."<<endl;
+     sleep(2);
     return x;
 }
 int monster::defend(){
     int x =def*2;
     cout<<name<<" use protection for "<<x<<" damage."<<endl;
+     sleep(2);
     return x;
 }
 monster::~monster()
@@ -175,8 +187,11 @@ void monster::battle(monster a, monster b){
     int ea=asta/2, c;
     int turn=0;
     int heal;
-    system("clear");
+    
 do{
+    if(turn>0)
+    sleep(2);
+    system("clear");
     if(turn>0){
         ea+=2;
         if(ea>=asta){
@@ -245,22 +260,27 @@ do{
                 if(bf>0&&batk!=0)
                 {
                     ahp-=bf;
-                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;   
+                    sleep(2);                
                     if(ahp<0)
                     {
                     ahp=0;
                     }
                     if(ahp>0){
                     cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
+
                         cout<<a.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                 else if(bf==0&&batk!=0) {
                     cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 aatk=a.nattack(b);
                 bdef=b.ndefend();
@@ -271,22 +291,26 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl; 
+                    sleep(2);                  
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                   else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
             break;
             case 2:
@@ -297,6 +321,7 @@ do{
                     bhp=b.gethp();
                 }
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
                 aatk=a.nattack(b);
                 bdef=b.ndefend();
                 af=aatk-bdef;
@@ -306,22 +331,26 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl; 
+                    sleep(2);                  
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
             break;
             case 3:
@@ -334,21 +363,25 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl; 
+                    sleep(2);                 
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }  
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 break;
         }
@@ -365,21 +398,25 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;
+                    sleep(2);                   
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 batk=b.nattack(a);
                 adef=a.ndefend();
@@ -390,22 +427,26 @@ do{
                 if(bf>0&&batk!=0)
                 {
                     ahp-=bf;
-                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;    
+                    sleep(2);               
                     if(ahp<0)
                     {
                     ahp=0;
                     }
                     if(ahp>0){
                     cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<a.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                 else if(bf==0&&batk!=0) {
                     cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                    sleep(2);
                 }
             break;
             case 2:
@@ -418,21 +459,25 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;  
+                    sleep(2);                 
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 heal=b.gethp()/10;
                 bhp+=heal;
@@ -441,6 +486,7 @@ do{
                     bhp=b.gethp();
                 }
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
                 break;
             case 3:   
                 aatk=a.nattack(b);
@@ -452,21 +498,25 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;  
+                    sleep(2);                 
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }  
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 break;
        }
@@ -478,6 +528,7 @@ do{
     if(ea<4)
     {
         cout<<name<<" has not enough energy!"<<endl;
+        sleep(2);
         ea-=2;
         break;
     }
@@ -496,22 +547,26 @@ do{
                 if(bf>0&&batk!=0)
                 {
                     ahp-=bf;
-                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;  
+                    sleep(2);                 
                     if(ahp<0)
                     {
                     ahp=0;
                     }
                     if(ahp>0){
                     cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<a.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                 else if(bf==0&&batk!=0) {
                     cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 aatk=a.sattack(b);
                 bdef=b.ndefend();
@@ -522,22 +577,26 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl; 
+                    sleep(2);                  
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                   else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
             break;
             case 2:
@@ -548,6 +607,7 @@ do{
                     bhp=b.gethp();
                 }
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
                 aatk=a.sattack(b);
                 bdef=b.ndefend();
                 af=aatk-bdef;
@@ -557,22 +617,26 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;  
+                    sleep(2);                 
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
             break;
             case 3:
@@ -585,21 +649,25 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;     
+                    sleep(2);              
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }  
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 break;
         }
@@ -616,21 +684,25 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl; 
+                    sleep(2);                  
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 batk=b.nattack(a);
                 adef=a.ndefend();
@@ -641,22 +713,26 @@ do{
                 if(bf>0&&batk!=0)
                 {
                     ahp-=bf;
-                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;    
+                    sleep(2);               
                     if(ahp<0)
                     {
                     ahp=0;
                     }
                     if(ahp>0){
                     cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<a.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                 else if(bf==0&&batk!=0) {
                     cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                    sleep(2);
                 }
             break;
             case 2:
@@ -669,21 +745,25 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl; 
+                    sleep(2);                  
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 heal=b.gethp()/10;
                 bhp+=heal;
@@ -692,6 +772,7 @@ do{
                     bhp=b.gethp();
                 }
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
                 break;
             case 3:   
                 aatk=a.sattack(b);
@@ -703,21 +784,25 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;  
+                    sleep(2);                 
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }  
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 break;
        }
@@ -729,6 +814,7 @@ do{
     if(ea==0)
     {
         cout<<name<<" has not enough energy!"<<endl;
+        sleep(2);
         ea-=2;
         break;
     }
@@ -747,22 +833,26 @@ do{
                 if(bf>0&&batk!=0)
                 {
                     ahp-=bf;
-                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;   
+                    sleep(2);                
                     if(ahp<0)
                     {
                     ahp=0;
                     }
                     if(ahp>0){
                     cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<a.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                 else if(bf==0&&batk!=0) {
                     cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 aatk=a.cattack(b,ea); 
                  ea-=ea;
@@ -774,22 +864,26 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;  
+                    sleep(2);                 
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                   else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
             break;
             case 2:
@@ -800,6 +894,7 @@ do{
                     bhp=b.gethp();
                 }
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
                 aatk=a.cattack(b,ea);
                  ea-=ea;
                 bdef=b.ndefend();
@@ -810,22 +905,27 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;   
+                    sleep(2);                
+
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
             break;
             case 3:
@@ -839,21 +939,25 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl; 
+                    sleep(2);                  
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }  
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 break;
         }
@@ -871,21 +975,25 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl; 
+                    sleep(2);                  
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 batk=b.nattack(a);
                 adef=a.ndefend();
@@ -896,22 +1004,26 @@ do{
                 if(bf>0&&batk!=0)
                 {
                     ahp-=bf;
-                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;  
+                    sleep(2);                 
                     if(ahp<0)
                     {
                     ahp=0;
                     }
                     if(ahp>0){
                     cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<a.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                 else if(bf==0&&batk!=0) {
                     cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                    sleep(2);
                 }
             break;
             case 2:
@@ -925,21 +1037,25 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;
+                    sleep(2);                   
                     if(bhp<0)
                     {
                     bhp=0;;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 heal=b.gethp()/10;
                 bhp+=heal;
@@ -948,6 +1064,7 @@ do{
                     bhp=b.gethp();
                 }
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
                 break;
             case 3:   
                 aatk=a.cattack(b,ea);
@@ -960,21 +1077,25 @@ do{
                 if(af>0&&aatk!=0)
                 {
                     bhp-=af;
-                    cout<<a.name<<" deals "<<af<<" damage."<<endl;                   
+                    cout<<a.name<<" deals "<<af<<" damage."<<endl;
+                    sleep(2);                   
                     if(bhp<0)
                     {
                     bhp=0;
                     }
                     if(bhp>0){
                     cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<b.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }  
                 }
                 else if(af==0&&aatk!=0) {
                     cout<<a.name<<" can't penetrate "<<b.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 break;
        }
@@ -986,6 +1107,7 @@ do{
     if(ea<2)
     {
         cout<<name<<" has not enough energy!"<<endl;
+        sleep(2);
         ea-=2;
         break;
     }
@@ -1004,22 +1126,26 @@ do{
                 if(bf>0&&batk!=0)
                 {
                     ahp-=bf;
-                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl; 
+                    sleep(2);                  
                     if(ahp<0)
                     {
                     ahp=0;
                     }
                     if(ahp>0){
                     cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<a.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                 else if(bf==0&&batk!=0) {
                     cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 break;
             case 2:
@@ -1030,6 +1156,7 @@ do{
                     bhp=b.gethp();
                 }
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
             adef=defend();
             break;
             case 3:
@@ -1052,22 +1179,26 @@ do{
                 if(bf>0&&batk!=0)
                 {
                     ahp-=bf;
-                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;
+                    sleep(2);                   
                     if(ahp<0)
                     {
                     ahp=0;
                     }
                     if(ahp>0){
                     cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<a.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                 else if(bf==0&&batk!=0) {
                     cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 break;
             case 2:
@@ -1079,6 +1210,7 @@ do{
                     bhp=b.gethp();
                 }
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
                 break;
             case 3:
             adef=a.defend();
@@ -1092,6 +1224,7 @@ do{
     if(ea<2)
     {
         cout<<name<<" has not enough energy!"<<endl;
+        sleep(2);
         ea-=2;
         break;
     }
@@ -1110,22 +1243,26 @@ do{
                 if(bf>0&&batk!=0)
                 {
                     ahp-=bf;
-                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;    
+                    sleep(2);               
                     if(ahp<0)
                     {
                     ahp=0;
                     }
                     if(ahp>0){
                     cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<a.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                 else if(bf==0&&batk!=0) {
                     cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                    sleep(2);
                 }
                 heal=a.gethp()/10;
                 ahp+=heal;
@@ -1135,9 +1272,11 @@ do{
                 }
                  if(ahp==a.gethp()){
                     cout<<a.name<<"now has a full HP."<<endl;
+                    sleep(2);
                 }
                 else{
                 cout<<a.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
                 }
                 break;
             case 2:
@@ -1149,9 +1288,11 @@ do{
                 }
                 if(bhp==b.gethp()){
                     cout<<b.name<<"now has a full HP."<<endl;
+                    sleep(2);
                 }
                 else{
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
                 }
                 heal=a.gethp()/10;
                 ahp+=heal;
@@ -1161,9 +1302,11 @@ do{
                 }
                  if(ahp==a.gethp()){
                     cout<<a.name<<"now has a full HP."<<endl;
+                    sleep(2);
                 }
                 else{
                 cout<<a.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
                 }
                 break;
             case 3:
@@ -1176,9 +1319,11 @@ do{
                 }
                  if(ahp==a.gethp()){
                     cout<<a.name<<"now has a full HP."<<endl;
+                    sleep(2);
                 }
                 else{
                 cout<<a.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
                 }
                 break;
             }
@@ -1193,9 +1338,11 @@ do{
                 }
                  if(ahp==a.gethp()){
                     cout<<a.name<<"now has a full HP."<<endl;
+                    sleep(2);
                 }
                 else{
                 cout<<a.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
                 }
             switch (bc)
             {
@@ -1209,22 +1356,26 @@ do{
                 if(bf>0&&batk!=0)
                 {
                     ahp-=bf;
-                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;                   
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;  
+                    sleep(2);                 
                     if(ahp<0)
                     {
                     ahp=0;
                     }
                     if(ahp>0){
                     cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    sleep(2);
                     }
                     else{
                         cout<<a.name<<" is dead."<<endl;
+                        sleep(2);
                         break;
                     }
                     
                 }
                 else if(bf==0&&batk!=0) {
                     cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                    sleep(2);
                 }
             break;
             case 2:
@@ -1236,9 +1387,11 @@ do{
                 }
                 if(bhp==b.gethp()){
                     cout<<b.name<<"now has a full HP."<<endl;
+                    sleep(2);
                 }
                 else{
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
                 }
 
             break;
