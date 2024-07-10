@@ -163,7 +163,7 @@ int main() {
                     }while(c==1&&result==1);
                 }
                             if(result==1){
-                            cout<<"You have save the energy for "<<round<<" times."<<endl;
+                            cout<<"You have save the world's energy for "<<round<<" times."<<endl;
                             sleep(2);
                             cout<<"You have eliminated these monsters."<<endl;
                             sleep(2);
@@ -175,7 +175,7 @@ int main() {
                             }
                             }
                             else{
-                            cout<<"You have save the energy for "<<round-1<<" times."<<endl;
+                            cout<<"You have save the world's energy for "<<round-1<<" times."<<endl;
                             sleep(2);
                             cout<<"You have eliminated these monsters."<<endl;
                             sleep(2);
