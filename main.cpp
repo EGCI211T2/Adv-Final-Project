@@ -6,6 +6,7 @@
 #include <ctime>
 #include "combat.h"
 #include <chrono>
+#include "stack.h"
 #include <thread>
 using namespace std;
 
@@ -83,17 +84,18 @@ bool askToContinue() {
 }
 
 int main() {
+    srand(time(NULL));
+    Stack s;
     char option;
     char chr;
-    int no;
-    char* name1 = new char[50];
+    int no,round=0,c,result;
+    char* name1 = new char[50],j;
     const char* mon[100] = {"Gorgath", "Zoltar", "Draknor", "Morthog", "Blazebane", "Thundersnout", "Venomclaw", "Shadowfang", "Grimscale", "Bonecrusher", "Frostbite", "Ironhide", "Scalebeard", "Bloodfang", "Wraithhorn", "Diremaw", "Bramblebeast", "Nightstalker", "Dreadnought", "Stormcaller", "Voidreaver", "Deathshade", "Pyroclasm", "Ravager", "Lichlord", "Carnifex", "Ghoulbane", "Netherfiend", "Warbringer", "Doomclaw", "Basilisk", "Hellhound", "Plaguemaw", "Corpsegrinder", "Nightmarer", "Firefang", "Darkseer", "Warlock", "Cryptkeeper", "Charnel", "Abyssal", "Skullduggery", "Harbinger", "Deathbringer", "Maleficent", "Bloodlust", "Dracolich", "Wyrmkin", "Titanclaw", "Venomspike", "Spiteful", "Miasma", "Phantasm", "Direwolf", "Hellfire", "Thunderclap", "Ashenfang", "Razorclaw", "Doomshade", "Grimreaper", "Stormwrath", "Bonegnasher", "Darkbane", "Wraithwalker", "Venomlord", "Skulldrinker", "Bloodreaver", "Shadowstalker", "Frostclaw", "Ironfist", "Scalethorn", "Bloodscream", "Wraithscream", "Direfang", "Brambleclaw", "Nightshade", "Dreadclaw", "Stormfury", "Voidwalker", "Deathhowl", "Pyrofang", "Ravager", "Lichbane", "Carnage", "Ghoulclaw", "Netherlord", "Warhowl", "Doomgaze", "Basiliskfang", "Hellclaw", "Plaguebringer", "Corpseclaw", "Nightmare", "Firemaw", "Darkclaw", "Warlock", "Cryptlord", "Charred", "Abysswalker", "Skullcrusher"};
 
     DataStorage dataStorage;
 
     bool continueGame = true;
 
-    while (continueGame) {
         displayMenu();
         do {
             cin >> option;
@@ -124,12 +126,49 @@ int main() {
             no = numin();
             switch (no) {
                 case 1:
+                {
                     clear();
                     cout << "Enter player name: ";
                     cin >> name1;
-                    cout << name1 << endl;
-                    //dataStorage.createNewCharacter();
-                    //dataStorage.displayPlayerData();
+                    monster A(name1);
+                    do{
+                        round++;
+                        j=rand()%100;
+                        int hp=(rand()%3+4)*round+10,atk=(rand()%3+2)*round/2,def=(rand()%3+2)*round/2,spd=(rand()%3+1)*round;
+                        monster B(mon[j],hp,atk,def,10,spd);
+                        A.upgrade();
+                        result=A.battle(A, B);
+                        switch (result){
+                            case 0:
+                            cout<<"You lose"<<endl;
+                            sleep(2);
+                            cout<<"You have save the energy for "<<round-1<<" times."<<endl;
+                            sleep(2);
+                            cout<<"Yoo have limited these monsters."<<endl;
+                            sleep(2);
+                            for(int i=1;i<round;i++)
+                            {
+                                cout<<i<<".";
+                                s.pop();
+                                sleep(1);
+                            }
+                            break;
+                            case 1:
+                            cout<<"You win"<<endl;
+                            s.push(mon[j]);
+                            break;
+                        }
+                        if(result==1){
+                        do{
+                            c;
+                            cout << "Do you want to continue? 1.y 2.n: ";
+                            c=numin();
+                            
+                        }while(c<1||c>2);
+                        }
+
+                    }while(c==1&&result==1);
+                }
                     break;
                 case 2:
                     cout << "Leaving the game" << endl;
@@ -140,7 +179,7 @@ int main() {
             }
         } while (no < 1 || no > 2);
 
-        if (!continueGame) break;
+       /*if (!continueGame) break;
 
         while (continueGame) {
             monster A(name1);
@@ -155,8 +194,8 @@ int main() {
                 clear();
                 // Optionally add any other logic for what happens after a battle here
             }
-        }
-    }
+        }*/
+    
 
     delete[] name1;
 

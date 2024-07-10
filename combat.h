@@ -22,11 +22,11 @@ public:
     int nattack(monster x);
     int sattack(monster x);
     int cattack(monster x,int s);
-    void battle(monster a,monster b);
+    int battle(monster a,monster b);
     int ndefend();
     int defend();
     void heal();
-    monster(string,int = 20,int = 1,int = 1,int=10,int=1);
+    monster(string,int = 10,int = 1,int = 1,int=8,int=1);
     ~monster();
 };
 
@@ -182,7 +182,7 @@ monster::~monster()
     //cout<<name<<" is dead."<<endl;
 }
 
-void monster::battle(monster a, monster b){
+int monster::battle(monster a, monster b){
  int ahp=a.gethp(),asta=a.getsta(),aspd=a.getspd(),bhp=b.gethp(),bspd=b.getspd(),ba=b.getatk(),bd=b.getdef();
     int ea=asta/2, c;
     int turn=0;
@@ -320,8 +320,16 @@ do{
                 {
                     bhp=b.gethp();
                 }
+                  if(bhp==b.gethp()){
+                    cout<<b.name<<" heals."<<endl;
+                    sleep(2);
+                    cout<<b.name<<" now has a full HP."<<endl;
+                    sleep(2);
+                }
+                else{
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
                 sleep(2);
+                }
                 aatk=a.nattack(b);
                 bdef=b.ndefend();
                 af=aatk-bdef;
@@ -485,8 +493,16 @@ do{
                 {
                     bhp=b.gethp();
                 }
+                  if(bhp==b.gethp()){
+                    cout<<b.name<<" heals."<<endl;
+                    sleep(2);
+                    cout<<b.name<<" now has a full HP."<<endl;
+                    sleep(2);
+                }
+                else{
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
                 sleep(2);
+                }
                 break;
             case 3:   
                 aatk=a.nattack(b);
@@ -606,8 +622,16 @@ do{
                 {
                     bhp=b.gethp();
                 }
+                  if(bhp==b.gethp()){
+                    cout<<b.name<<" heals."<<endl;
+                    sleep(2);
+                    cout<<b.name<<" now has a full HP."<<endl;
+                    sleep(2);
+                }
+                else{
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
                 sleep(2);
+                }
                 aatk=a.sattack(b);
                 bdef=b.ndefend();
                 af=aatk-bdef;
@@ -771,8 +795,16 @@ do{
                 {
                     bhp=b.gethp();
                 }
+                  if(bhp==b.gethp()){
+                    cout<<b.name<<" heals."<<endl;
+                    sleep(2);
+                    cout<<b.name<<" now has a full HP."<<endl;
+                    sleep(2);
+                }
+                else{
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
                 sleep(2);
+                }
                 break;
             case 3:   
                 aatk=a.sattack(b);
@@ -893,8 +925,16 @@ do{
                 {
                     bhp=b.gethp();
                 }
+                  if(bhp==b.gethp()){
+                    cout<<b.name<<" heals."<<endl;
+                    sleep(2);
+                    cout<<b.name<<" now has a full HP."<<endl;
+                    sleep(2);
+                }
+                else{
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
                 sleep(2);
+                }
                 aatk=a.cattack(b,ea);
                  ea-=ea;
                 bdef=b.ndefend();
@@ -1155,8 +1195,16 @@ do{
                 {
                     bhp=b.gethp();
                 }
+                 if(bhp==b.gethp()){
+                    cout<<b.name<<" heals."<<endl;
+                    sleep(2);
+                    cout<<b.name<<" now has a full HP."<<endl;
+                    sleep(2);
+                }
+                else{
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
                 sleep(2);
+                }
             adef=defend();
             break;
             case 3:
@@ -1209,8 +1257,16 @@ do{
                 {
                     bhp=b.gethp();
                 }
+                if(bhp==b.gethp()){
+                    cout<<b.name<<" heals."<<endl;
+                    sleep(2);
+                    cout<<b.name<<" now has a full HP."<<endl;
+                    sleep(2);
+                }
+                else{
                 cout<<b.name<<" heals 10 percent of its HP."<<endl;
                 sleep(2);
+                }
                 break;
             case 3:
             adef=a.defend();
@@ -1271,7 +1327,9 @@ do{
                     ahp=a.gethp();
                 }
                  if(ahp==a.gethp()){
-                    cout<<a.name<<"now has a full HP."<<endl;
+                    cout<<a.name<<" heals."<<endl;
+                    sleep(2);
+                    cout<<a.name<<" now has a full HP."<<endl;
                     sleep(2);
                 }
                 else{
@@ -1287,7 +1345,9 @@ do{
                     bhp=b.gethp();
                 }
                 if(bhp==b.gethp()){
-                    cout<<b.name<<"now has a full HP."<<endl;
+                    cout<<b.name<<" heals."<<endl;
+                    sleep(2);
+                    cout<<b.name<<" now has a full HP."<<endl;
                     sleep(2);
                 }
                 else{
@@ -1301,7 +1361,9 @@ do{
                     ahp=a.gethp();
                 }
                  if(ahp==a.gethp()){
-                    cout<<a.name<<"now has a full HP."<<endl;
+                    cout<<a.name<<" heals."<<endl;
+                    sleep(2);
+                    cout<<a.name<<" now has a full HP."<<endl;
                     sleep(2);
                 }
                 else{
@@ -1318,7 +1380,7 @@ do{
                     ahp=a.gethp();
                 }
                  if(ahp==a.gethp()){
-                    cout<<a.name<<"now has a full HP."<<endl;
+                    cout<<a.name<<" now has a full HP."<<endl;
                     sleep(2);
                 }
                 else{
@@ -1337,7 +1399,9 @@ do{
                     ahp=a.gethp();
                 }
                  if(ahp==a.gethp()){
-                    cout<<a.name<<"now has a full HP."<<endl;
+                    cout<<a.name<<" heals."<<endl;
+                    sleep(2);
+                    cout<<a.name<<" now has a full HP."<<endl;
                     sleep(2);
                 }
                 else{
@@ -1386,7 +1450,7 @@ do{
                     bhp=b.gethp();
                 }
                 if(bhp==b.gethp()){
-                    cout<<b.name<<"now has a full HP."<<endl;
+                    cout<<b.name<<" now has a full HP."<<endl;
                     sleep(2);
                 }
                 else{
@@ -1403,8 +1467,9 @@ do{
     }
     }
 
-
-    
-
 }while(ahp>0&&bhp>0);
-}
+    if(ahp>0)
+    return 1;
+    else 
+    return 0;
+ }
