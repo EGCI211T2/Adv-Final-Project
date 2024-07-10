@@ -160,15 +160,29 @@ int main() {
 
                     }while(c==1&&result==1);
                 }
-                            cout<<"You have save the energy for "<<round-1<<" times."<<endl;
+                            if(result==1){
+                            cout<<"You have save the energy for "<<round<<" times."<<endl;
                             sleep(2);
                             cout<<"You have limited these monsters."<<endl;
+                            sleep(2);
+                            for(int i=1;i<=round;i++)
+                            {
+                                cout<<i<<".";
+                                s.pop();
+                                sleep(1);
+                            }
+                            }
+                            else{
+                            cout<<"You have save the energy for "<<round-1<<" times."<<endl;
+                            sleep(2);
+                            cout<<"You have eliminated these monsters."<<endl;
                             sleep(2);
                             for(int i=1;i<round;i++)
                             {
                                 cout<<i<<".";
                                 s.pop();
                                 sleep(1);
+                            }
                             }
                     break;
                 case 2:
