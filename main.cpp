@@ -138,21 +138,11 @@ int main() {
                         int hp=(rand()%3+4)*round+10,atk=(rand()%3+2)*round/2,def=(rand()%3+2)*round/2,spd=(rand()%3+1)*round;
                         monster B(mon[j],hp,atk,def,10,spd);
                         A.upgrade();
-                        result=A.battle(A, B);
+                        result=A.battle(A, B,round-1);
                         switch (result){
                             case 0:
                             cout<<"You lose"<<endl;
                             sleep(2);
-                            cout<<"You have save the energy for "<<round-1<<" times."<<endl;
-                            sleep(2);
-                            cout<<"You have limited these monsters."<<endl;
-                            sleep(2);
-                            for(int i=1;i<round;i++)
-                            {
-                                cout<<i<<".";
-                                s.pop();
-                                sleep(1);
-                            }
                             break;
                             case 1:
                             cout<<"You win"<<endl;
@@ -170,6 +160,16 @@ int main() {
 
                     }while(c==1&&result==1);
                 }
+                            cout<<"You have save the energy for "<<round-1<<" times."<<endl;
+                            sleep(2);
+                            cout<<"You have limited these monsters."<<endl;
+                            sleep(2);
+                            for(int i=1;i<round;i++)
+                            {
+                                cout<<i<<".";
+                                s.pop();
+                                sleep(1);
+                            }
                     break;
                 case 2:
                     cout << "Leaving the game" << endl;

@@ -22,7 +22,7 @@ public:
     int nattack(monster x);
     int sattack(monster x);
     int cattack(monster x,int s);
-    int battle(monster a,monster b);
+    int battle(monster a,monster b,int round);
     int ndefend();
     int defend();
     void heal();
@@ -182,7 +182,7 @@ monster::~monster()
     //cout<<name<<" is dead."<<endl;
 }
 
-int monster::battle(monster a, monster b){
+int monster::battle(monster a, monster b,int round){
  int ahp=a.gethp(),asta=a.getsta(),aspd=a.getspd(),bhp=b.gethp(),bspd=b.getspd(),ba=b.getatk(),bd=b.getdef();
     int ea=asta/2, c;
     int turn=0;
@@ -222,6 +222,8 @@ do{
     cout<<b.name<<endl;
     cout<<"HP. : "<<setw(5)<<bhp<<"  Speed : "<<setw(5)<<bspd<<endl;
     cout<<"Atk : "<<setw(5)<<ba<<"  Defend: "<<setw(5)<<bd<<endl;
+    cout<<"----------------------------------"<<endl;
+    cout<<"Score: "<<round<<endl;
     cout<<"----------------------------------"<<endl;
     cout<<"Choose the action: "<<endl;
     cout<<"1.Normal Attack"<<endl;
