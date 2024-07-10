@@ -65,7 +65,7 @@ int monster::getdef(){
 }
 void monster::upgrade(){
   int c;
-  upoint=3;
+  upoint=5;
         do{
             system("clear");
             cout<<"Name: "<<name<<endl;

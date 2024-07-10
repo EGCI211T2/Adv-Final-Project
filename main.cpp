@@ -144,7 +144,7 @@ int main() {
                             sleep(2);
                             cout<<"You have save the energy for "<<round-1<<" times."<<endl;
                             sleep(2);
-                            cout<<"Yoo have limited these monsters."<<endl;
+                            cout<<"You have limited these monsters."<<endl;
                             sleep(2);
                             for(int i=1;i<round;i++)
                             {
