@@ -267,7 +267,7 @@ do{
                     ahp=0;
                     }
                     if(ahp>0){
-                    cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    cout<<a.name<<" has "<<ahp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{

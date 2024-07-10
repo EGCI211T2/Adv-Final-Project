@@ -5,6 +5,8 @@
 #include <cstdlib>
 #include <ctime>
 #include "combat.h"
+#include <chrono>
+#include <thread>
 using namespace std;
 
 void displayMenu() {
@@ -25,51 +27,46 @@ void characterMenu() {
     cout << "Select option: ";
 }
 
-// #1 start
 void startGame() {
     cout << "Starting the game...\n";
 }
 
-// #2 info
 void information() {
-    cout << "";
-    cout << "";
     cout << "";
 }
 
-// #3 upgrade
 void upgrade() {
     cout << "";
 }
 
-// #4 history
 void history() {
     cout << "";
 }
 
-// #5 save
 void save() {
     cout << "";
 }
 
-// #6 exit
 void exitGame() {
     cout << "Quitting the game...\n";
     cout << "Good bye!\n";
 }
 
-// #7 intro
 void intro() {
     cout << "Long time ago...\n";
     cout << "Press x to continue." << endl;
 }
 
-// #7 loading
 void loading() {
-    cout << "Loading....\n";
+    cout << "Loading";
+    for (int i = 0; i < 10; ++i) {
+        cout << ".";
+        cout.flush();
+        this_thread::sleep_for(chrono::milliseconds(500));
+    }
+    cout << endl;
 }
 
-// Clear screen function
 void clear() {
 #ifdef _WIN32
     system("cls");
@@ -78,64 +75,90 @@ void clear() {
 #endif
 }
 
+bool askToContinue() {
+    char choice;
+    cout << "Do you want to continue? (y/n): ";
+    cin >> choice;
+    return (choice == 'y' || choice == 'Y');
+}
+
 int main() {
     char option;
     char chr;
     int no;
-    char * name1 = new char[50];
-    char* mon[100] = {"Gorgath", "Zoltar", "Draknor", "Morthog", "Blazebane", "Thundersnout", "Venomclaw", "Shadowfang", "Grimscale", "Bonecrusher", "Frostbite", "Ironhide", "Scalebeard", "Bloodfang", "Wraithhorn", "Diremaw", "Bramblebeast", "Nightstalker", "Dreadnought", "Stormcaller", "Voidreaver", "Deathshade", "Pyroclasm", "Ravager", "Lichlord", "Carnifex", "Ghoulbane", "Netherfiend", "Warbringer", "Doomclaw", "Basilisk", "Hellhound", "Plaguemaw", "Corpsegrinder", "Nightmarer", "Firefang", "Darkseer", "Warlock", "Cryptkeeper", "Charnel", "Abyssal", "Skullduggery", "Harbinger", "Deathbringer", "Maleficent", "Bloodlust", "Dracolich", "Wyrmkin", "Titanclaw", "Venomspike", "Spiteful", "Miasma", "Phantasm", "Direwolf", "Hellfire", "Thunderclap", "Ashenfang", "Razorclaw", "Doomshade", "Grimreaper", "Stormwrath", "Bonegnasher", "Darkbane", "Wraithwalker", "Venomlord", "Skulldrinker", "Bloodreaver", "Shadowstalker", "Frostclaw", "Ironfist", "Scalethorn", "Bloodscream", "Wraithscream", "Direfang", "Brambleclaw", "Nightshade", "Dreadclaw", "Stormfury", "Voidwalker", "Deathhowl", "Pyrofang", "Ravager", "Lichbane", "Carnage", "Ghoulclaw", "Netherlord", "Warhowl", "Doomgaze", "Basiliskfang", "Hellclaw", "Plaguebringer", "Corpseclaw", "Nightmare", "Firemaw", "Darkclaw", "Warlock", "Cryptlord", "Charred", "Abysswalker", "Skullcrusher"};
+    char* name1 = new char[50];
+    const char* mon[100] = {"Gorgath", "Zoltar", "Draknor", "Morthog", "Blazebane", "Thundersnout", "Venomclaw", "Shadowfang", "Grimscale", "Bonecrusher", "Frostbite", "Ironhide", "Scalebeard", "Bloodfang", "Wraithhorn", "Diremaw", "Bramblebeast", "Nightstalker", "Dreadnought", "Stormcaller", "Voidreaver", "Deathshade", "Pyroclasm", "Ravager", "Lichlord", "Carnifex", "Ghoulbane", "Netherfiend", "Warbringer", "Doomclaw", "Basilisk", "Hellhound", "Plaguemaw", "Corpsegrinder", "Nightmarer", "Firefang", "Darkseer", "Warlock", "Cryptkeeper", "Charnel", "Abyssal", "Skullduggery", "Harbinger", "Deathbringer", "Maleficent", "Bloodlust", "Dracolich", "Wyrmkin", "Titanclaw", "Venomspike", "Spiteful", "Miasma", "Phantasm", "Direwolf", "Hellfire", "Thunderclap", "Ashenfang", "Razorclaw", "Doomshade", "Grimreaper", "Stormwrath", "Bonegnasher", "Darkbane", "Wraithwalker", "Venomlord", "Skulldrinker", "Bloodreaver", "Shadowstalker", "Frostclaw", "Ironfist", "Scalethorn", "Bloodscream", "Wraithscream", "Direfang", "Brambleclaw", "Nightshade", "Dreadclaw", "Stormfury", "Voidwalker", "Deathhowl", "Pyrofang", "Ravager", "Lichbane", "Carnage", "Ghoulclaw", "Netherlord", "Warhowl", "Doomgaze", "Basiliskfang", "Hellclaw", "Plaguebringer", "Corpseclaw", "Nightmare", "Firemaw", "Darkclaw", "Warlock", "Cryptlord", "Charred", "Abysswalker", "Skullcrusher"};
 
     DataStorage dataStorage;
 
-    displayMenu();
-    do {
-        cin >> option;
-        switch (option) {
-            case 'x':
-                clear();
-                intro();
-                break;
-            default:
-                cout << "Invalid option! Please try again.\n";
-        }
-    } while (option!='x');
+    bool continueGame = true;
 
-    do {
-        cin >> chr;
-        switch (chr) {
-            case 'x':
-                clear();
-                loading();
-                break;
-            default:
-                cout << "Invalid character! Please try again.\n";
-        }
-    } while (chr != 'x');
+    while (continueGame) {
+        displayMenu();
+        do {
+            cin >> option;
+            switch (option) {
+                case 'x':
+                    clear();
+                    intro();
+                    break;
+                default:
+                    cout << "Invalid option! Please try again.\n";
+            }
+        } while (option != 'x');
 
-    characterMenu();
-    do{
-        no = numin();
-        switch (no) {
-            case 1:
-                clear();
-                cout<<"Enter player name: ";
-                cin>>name1;
-                cout<<name1;
-                //dataStorage.createNewCharacter();
-                //dataStorage.displayPlayerData();
-                break;
-            case 2:
-                cout << "Leaving the game" << endl;
-                // Add logic to continue the game
-                break;
-            default:
-                cout << "Invalid option. Please select again." << endl;
-        }
-    } while(no<1||no>2);
+        do {
+            cin >> chr;
+            switch (chr) {
+                case 'x':
+                    clear();
+                    loading();
+                    break;
+                default:
+                    cout << "Invalid character! Please try again.\n";
+            }
+        } while (chr != 'x');
 
-    monster A(name1);
-    monster B(mon[55]);
-    A.upgrade();A.battle(A,B);
+        do {
+            characterMenu();
+            no = numin();
+            switch (no) {
+                case 1:
+                    clear();
+                    cout << "Enter player name: ";
+                    cin >> name1;
+                    cout << name1 << endl;
+                    //dataStorage.createNewCharacter();
+                    //dataStorage.displayPlayerData();
+                    break;
+                case 2:
+                    cout << "Leaving the game" << endl;
+                    continueGame = false;
+                    break;
+                default:
+                    cout << "Invalid option. Please select again." << endl;
+            }
+        } while (no < 1 || no > 2);
+
+        if (!continueGame) break;
+
+        while (continueGame) {
+            monster A(name1);
+            monster B(mon[1]);
+            A.upgrade();
+            A.battle(A, B);
+
+            if (!askToContinue()) {
+                continueGame = false;
+                exitGame();
+            } else {
+                clear();
+                // Optionally add any other logic for what happens after a battle here
+            }
+        }
+    }
+
+    delete[] name1;
 
     return 0;
 }
