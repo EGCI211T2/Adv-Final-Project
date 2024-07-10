@@ -166,7 +166,7 @@ int monster::cattack(monster x,int s){
     }
 }
 int monster::ndefend(){
-    int x =(def/10)*(rand()%10+1);
+    int x =(def/10)*(rand()%7+4);
     cout<<name<<" defends "<<x<<" damage."<<endl;
      sleep(2);
     return x;

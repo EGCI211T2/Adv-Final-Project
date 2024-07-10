@@ -19,6 +19,7 @@ void displayMenu() {
 }
 
 void characterMenu() {
+    system("clear");
     cout << " _______________________________ \n";
     cout << "|                               |\n";
     cout << "|          1.Play               |\n";
