@@ -43,7 +43,7 @@ void LL::insert(string name, int score)
 
   newPtr = new SCORE(name,score); 
 
-  if (newPtr != NULL) { // is space available
+  if (newPtr != NULL) { 
 
     previousPtr = NULL;
     currentPtr = hol;
@@ -64,7 +64,7 @@ void LL::insert(string name, int score)
       previousPtr->set_next(newPtr);
       
       newPtr->set_next(currentPtr);
-        } // end else
+        }
     ++size;
   } 
   else {

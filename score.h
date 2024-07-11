@@ -23,7 +23,7 @@ SCORE::SCORE(string n,int s){
     name=n;
     data=s;
     nextPtr=NULL;
-    //pPtr =NULL; not using doubly
+    pPtr =NULL;
 }
 void SCORE::set_prev(SCOREPtr t)
 {
