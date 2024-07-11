@@ -8,10 +8,8 @@ class LL {
 
 public:
   LL();
-  int deletes(int value);
   int isEmpty();
   void insert(string name, int score);
-  void printList();
   ~LL();
  void printListR();
  void shigh();
@@ -25,7 +23,6 @@ LL::LL() {
 }
 
 LL::~LL() {
-  /*cout << "deleting all nodes" << endl;
   SCOREPtr t;
   t = hol;
   int i;
@@ -33,7 +30,7 @@ LL::~LL() {
     t = hol->get_next();
     delete hol;
     hol = t;
-  }*/
+  }
 }
 void LL::insert(string name, int score) 
 {
@@ -62,7 +59,7 @@ void LL::insert(string name, int score)
     else { 
       // insert new node between previousPtr and currentPtr
       previousPtr->set_next(newPtr);
-      
+
       newPtr->set_next(currentPtr);
         }
     ++size;

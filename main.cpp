@@ -218,24 +218,6 @@ int main() {
             }
         } while (no < 1 || no > 2);
 
-       /*if (!continueGame) break;
-
-        while (continueGame) {
-            monster A(name1);
-            monster B(mon[1]);
-            A.upgrade();
-            A.battle(A, B);
-
-            if (!askToContinue()) {
-                continueGame = false;
-                exitGame();
-            } else {
-                clear();
-                // Optionally add any other logic for what happens after a battle here
-            }
-        }*/
-    
-
     delete[] name1;
 
     return 0;
