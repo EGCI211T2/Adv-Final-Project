@@ -112,13 +112,13 @@ void monster::upgrade(){
     
 
 int monster::sattack(monster x){
-    int p=rand()%4;
+    int p=rand()%7;
     if(p==0){
         cout<<name<<" miss the special attack."<<endl;
         sleep(2);
         return 0;
     }
-    else if(p<3){
+    else if(p<6){
         cout<<name<<" attacks "<<x.name<<" "<<atk*3<<" damage."<<endl;
          sleep(2);
         return atk*3;
@@ -132,13 +132,13 @@ int monster::sattack(monster x){
     }
 }
 int monster::nattack(monster x){
-    int p=rand()%4;
+    int p=rand()%7;
     if(p==0){
         cout<<name<<" miss the attack."<<endl;
          sleep(2);
         return 0;
     }
-    else if(p<3){
+    else if(p<6){
         cout<<name<<" attacks "<<x.name<<" "<<atk<<" damage."<<endl;
          sleep(2);
         return atk;
@@ -153,7 +153,7 @@ int monster::nattack(monster x){
 
 }
 int monster::cattack(monster x,int s){
-    int p=rand()%4;
+    int p=rand()%7;
     if(p==0){
         cout<<name<<" miss the charge attack."<<endl;
          sleep(2);

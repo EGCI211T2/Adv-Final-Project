@@ -156,7 +156,7 @@ int main() {
                         if(result==1){
                         do{
                             c;
-                            cout << "Do you want to continue? 1.y 2.n: ";
+                            cout << "Do you want to continue?(1.Yes/2.No): ";
                             c=numin();
                             
                         }while(c<1||c>2);
