@@ -201,11 +201,11 @@ do{
     turn++;
     int bb=rand()%15+1;
     int bc;
-    if(bb<10)
+    if(bb<11)
     {
     bc=1;
     }
-    else if(bb<13)
+    else if(bb<14)
     {
         bc=2;
     }
@@ -230,7 +230,7 @@ do{
     cout<<"2.Super Attack"<<endl;
     cout<<"3.Charge Attack"<<endl;
     cout<<"4.Protect"<<endl;
-     cout<<"6.Skip"<<endl;
+    cout<<"6.Skip"<<endl;
     do{
     cout<<":";
     c=numin();

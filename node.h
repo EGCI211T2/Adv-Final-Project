@@ -16,7 +16,6 @@ typedef NODE* NodePtr;
 NODE::NODE(string n){
     name=n;
     nextPtr=NULL;
-    //pPtr =NULL; not using doubly
 }
 NODE* NODE::get_next(){
     return nextPtr;
