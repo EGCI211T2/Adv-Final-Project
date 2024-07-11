@@ -8,8 +8,8 @@
 #include <chrono>
 #include "stack.h"
 #include <thread>
+#include "history.h"
 using namespace std;
-
 void displayMenu() {
     cout <<"  ________                                .___ .__                                            _____        __    .__                   ___________                               ____            "<<endl;
     cout <<" /  _____/   __ __  _____    _______    __| _/ |__| _____      ____     ______       ____   _/ ____\\     _/  |_  |  |__     ____       \\_   _____/   ____     ____   _______    / ___\\   ___.__."<<endl;
@@ -20,13 +20,14 @@ void displayMenu() {
     cout << "press x to continue" << endl;
 }
 
-void characterMenu() {
+void characterMenu(LL x) {
     system("clear");
     cout << " _______________________________ \n";
     cout << "|                               |\n";
     cout << "|          1.Play               |\n";
     cout << "|          2.Exit               |\n";
     cout << "|_______________________________|\n";
+    shigh(x);
     cout << " \n";
     cout << "Select option: ";
 }
@@ -89,6 +90,7 @@ bool askToContinue() {
 int main() {
     srand(time(NULL));
     Stack s;
+     LL h;
     char option;
     char chr;
     int no,round=0,c,result;
@@ -125,7 +127,7 @@ int main() {
         } while (chr != 'x');
 
         do {
-            characterMenu();
+            characterMenu(h);
             no = numin();
             switch (no) {
                 case 1:
@@ -163,7 +165,7 @@ int main() {
                     }while(c==1&&result==1);
                 }
                             if(result==1){
-                            cout<<"You have save the world's energy for "<<round<<" times."<<endl;
+                            cout<<"You have save the energy for "<<round<<" times."<<endl;
                             sleep(2);
                             cout<<"You have eliminated these monsters."<<endl;
                             sleep(2);
@@ -173,9 +175,10 @@ int main() {
                                 s.pop();
                                 sleep(1);
                             }
+                            vhigh(name1,round);
                             }
                             else{
-                            cout<<"You have save the world's energy for "<<round-1<<" times."<<endl;
+                            cout<<"You have save the energy for "<<round-1<<" times."<<endl;
                             sleep(2);
                             cout<<"You have eliminated these monsters."<<endl;
                             sleep(2);
@@ -185,6 +188,7 @@ int main() {
                                 s.pop();
                                 sleep(1);
                             }
+                            vhigh(name1,round-1);
                             }
                     break;
                 case 2:
