@@ -63,13 +63,13 @@ void intro() {
     sleep(3);
     cout<<"from the invasion of the alien alliance called “Thanong” who steals the energy from our Earth."<<endl<<endl<<endl;;
     sleep(3);
-    cout<<"Guardians of the Energy"<<endl<<endl;;
+    cout<<"Guardians of the Energy"<<endl<<endl<<endl;;
     sleep(3);
     cout<<"the group of humans who are willing to protect and bring the energy back from Thanong."<<endl<<endl;;
     sleep(3);
     cout<<"This is the story of legendary heroes called “Guardians of the Energy”."<<endl<<endl;;
     sleep(2);
-    cout<<"the story begin";
+    cout<<"and so the story begin";
     sleep(1);
   for (int i = 0; i < 5; ++i) {
         cout << ".";
@@ -183,7 +183,7 @@ int main() {
                     }while(c==1&&result==1);
                 }
                             if(result==1){
-                            cout<<"You have save the energy world's "<<round<<" times."<<endl;
+                            cout<<"You have saved the world's energy "<<round<<" times."<<endl;
                             sleep(2);
                             cout<<"You have eliminated these monsters."<<endl;
                             sleep(2);
@@ -196,7 +196,7 @@ int main() {
                             vhigh(name1,round);
                             }
                             else{
-                            cout<<"You have save the world's energy "<<round-1<<" times."<<endl;
+                            cout<<"You have saved the world's energy "<<round-1<<" times."<<endl;
                             sleep(2);
                             cout<<"You have eliminated these monsters."<<endl;
                             sleep(2);
