@@ -299,7 +299,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -347,7 +347,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -379,7 +379,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -414,7 +414,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -475,7 +475,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -522,7 +522,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -601,7 +601,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -649,7 +649,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -681,7 +681,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -716,7 +716,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -777,7 +777,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -824,7 +824,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -904,7 +904,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -954,7 +954,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -987,7 +987,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -1023,7 +1023,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -1085,7 +1085,7 @@ do{
                     bhp=0;;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -1125,7 +1125,7 @@ do{
                     bhp=0;
                     }
                     if(bhp>0){
-                    cout<<b.name<<" has "<<bhp<<" left."<<endl;
+                    cout<<b.name<<" has "<<bhp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
@@ -1487,7 +1487,7 @@ do{
                     ahp=0;
                     }
                     if(ahp>0){
-                    cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    cout<<a.name<<" has "<<ahp<<" hp left."<<endl;
                     sleep(2);
                     }
                     else{
