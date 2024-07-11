@@ -157,7 +157,7 @@ int main() {
                     do{
                         round++;
                         j=rand()%100;
-                        int hp=(rand()%3+4)*round+10,atk=(rand()%3+2)*round/2,def=(rand()%3+2)*round/2,spd=(rand()%3+1)*round;
+                        int hp=(rand()%3+4)*round+10,atk=(rand()%3+2)*round,def=(rand()%3+2)*round,spd=(rand()%3+1)*round;
                         monster B(mon[j],hp,atk,def,10,spd);
                         A.upgrade();
                         result=A.battle(A, B,round-1);
