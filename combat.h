@@ -25,7 +25,6 @@ public:
     int battle(monster a,monster b,int round);
     int ndefend();
     int defend();
-    void heal();
     monster(string,int = 10,int = 1,int = 1,int=8,int=1);
     ~monster();
 };
