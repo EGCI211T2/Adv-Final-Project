@@ -94,7 +94,6 @@ void LL::printListR()
     } 
     
 
-    //puts(" NULL\n");
   } 
 } 
 void shigh(LL h){
