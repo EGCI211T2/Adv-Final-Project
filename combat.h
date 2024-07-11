@@ -199,13 +199,13 @@ do{
         }
     }
     turn++;
-    int bb=rand()%10+1;
+    int bb=rand()%15+1;
     int bc;
-    if(bb<6)
+    if(bb<10)
     {
     bc=1;
     }
-    else if(bb<9)
+    else if(bb<13)
     {
         bc=2;
     }
@@ -230,15 +230,15 @@ do{
     cout<<"2.Super Attack"<<endl;
     cout<<"3.Charge Attack"<<endl;
     cout<<"4.Protect"<<endl;
-    cout<<"5.Restore"<<endl;
+     cout<<"6.Skip"<<endl;
     do{
     cout<<":";
     c=numin();
-    if(c<1||c>5)
+    if(c<1||c>6)
     {
         cout<<"Please choose action on the list"<<endl;
     }
-    }while(c<1||c>5);
+    }while(c<1||c>6);
     switch (c){
     case 1:
     if(ea<1)
@@ -1466,6 +1466,74 @@ do{
              
             }
     }
+    }
+    break;
+    case 6:{
+        switch (bc)
+            {
+            case 1:
+                batk=b.nattack(a);
+                adef=a.ndefend();
+                bf=batk-adef;
+                if(bf<0){
+                    bf=0;
+                }
+                if(bf>0&&batk!=0)
+                {
+                    ahp-=bf;
+                    cout<<b.name<<" deals "<<bf<<" damage."<<endl;    
+                    sleep(2);               
+                    if(ahp<0)
+                    {
+                    ahp=0;
+                    }
+                    if(ahp>0){
+                    cout<<a.name<<" has "<<ahp<<" left."<<endl;
+                    sleep(2);
+                    }
+                    else{
+                        cout<<a.name<<" is dead."<<endl;
+                        sleep(2);
+                        break;
+                    }
+                    
+                }
+                else if(bf==0&&batk!=0) {
+                    cout<<b.name<<" can't penetrate "<<a.name<<" defend."<<endl;
+                    sleep(2);
+                }
+                cout<<a.name<<" skip the turn."<<endl;
+                sleep(2);
+                break;
+            case 2:
+            heal=b.gethp()/10;
+                bhp+=heal;
+                if(bhp>=b.gethp())
+                {
+                    bhp=b.gethp();
+                }
+                if(bhp==b.gethp()){
+                    cout<<b.name<<" heals."<<endl;
+                    sleep(2);
+                    cout<<b.name<<" now has a full HP."<<endl;
+                    sleep(2);
+                }
+                else{
+                cout<<b.name<<" heals 10 percent of its HP."<<endl;
+                sleep(2);
+                }
+                cout<<a.name<<" skip the turn."<<endl;
+                sleep(2);
+               
+                break;
+            case 3:
+            bdef=b.defend();
+            cout<<a.name<<" skip the turn."<<endl;
+                sleep(2);
+                break;
+            }
+
+
     }
     }
 

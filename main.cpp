@@ -1,6 +1,5 @@
 #include <iostream>
 #include "check.h"
-#include "data_storage.h"
 #include <string>
 #include <cstdlib>
 #include <ctime>
@@ -58,7 +57,27 @@ void exitGame() {
 }
 
 void intro() {
-    cout << "Long time ago...\n";
+    cout << "In the year 2077,\n\n";
+    sleep(2);
+    cout<< "the Earth has faced insufficient energy problems"<<endl<<endl;
+    sleep(3);
+    cout<<"from the invasion of the alien alliance called “Thanong” who steals the energy from our Earth."<<endl<<endl<<endl;;
+    sleep(3);
+    cout<<"Guardians of the Energy"<<endl<<endl;;
+    sleep(3);
+    cout<<"the group of humans who are willing to protect and bring the energy back from Thanong."<<endl<<endl;;
+    sleep(3);
+    cout<<"This is the story of legendary heroes called “Guardians of the Energy”."<<endl<<endl;;
+    sleep(2);
+    cout<<"the story begin";
+    sleep(1);
+  for (int i = 0; i < 5; ++i) {
+        cout << ".";
+        cout.flush();
+        this_thread::sleep_for(chrono::milliseconds(500));
+    }
+    cout << endl<<endl;
+
     cout << "Press x to continue." << endl;
 }
 
@@ -97,7 +116,6 @@ int main() {
     char* name1 = new char[50],j;
     const char* mon[100] = {"Gorgath", "Zoltar", "Draknor", "Morthog", "Blazebane", "Thundersnout", "Venomclaw", "Shadowfang", "Grimscale", "Bonecrusher", "Frostbite", "Ironhide", "Scalebeard", "Bloodfang", "Wraithhorn", "Diremaw", "Bramblebeast", "Nightstalker", "Dreadnought", "Stormcaller", "Voidreaver", "Deathshade", "Pyroclasm", "Ravager", "Lichlord", "Carnifex", "Ghoulbane", "Netherfiend", "Warbringer", "Doomclaw", "Basilisk", "Hellhound", "Plaguemaw", "Corpsegrinder", "Nightmarer", "Firefang", "Darkseer", "Warlock", "Cryptkeeper", "Charnel", "Abyssal", "Skullduggery", "Harbinger", "Deathbringer", "Maleficent", "Bloodlust", "Dracolich", "Wyrmkin", "Titanclaw", "Venomspike", "Spiteful", "Miasma", "Phantasm", "Direwolf", "Hellfire", "Thunderclap", "Ashenfang", "Razorclaw", "Doomshade", "Grimreaper", "Stormwrath", "Bonegnasher", "Darkbane", "Wraithwalker", "Venomlord", "Skulldrinker", "Bloodreaver", "Shadowstalker", "Frostclaw", "Ironfist", "Scalethorn", "Bloodscream", "Wraithscream", "Direfang", "Brambleclaw", "Nightshade", "Dreadclaw", "Stormfury", "Voidwalker", "Deathhowl", "Pyrofang", "Ravager", "Lichbane", "Carnage", "Ghoulclaw", "Netherlord", "Warhowl", "Doomgaze", "Basiliskfang", "Hellclaw", "Plaguebringer", "Corpseclaw", "Nightmare", "Firemaw", "Darkclaw", "Warlock", "Cryptlord", "Charred", "Abysswalker", "Skullcrusher"};
 
-    DataStorage dataStorage;
 
     bool continueGame = true;
 

@@ -58,7 +58,7 @@ void LL::insert(string name, int score)
         newPtr->set_next(hol);
         hol = newPtr;
        
-      }  // end if
+      }
     else { 
       // insert new node between previousPtr and currentPtr
       previousPtr->set_next(newPtr);
@@ -69,55 +69,8 @@ void LL::insert(string name, int score)
   } 
   else {
     cout << score << " not inserted. No memory available." << endl;
-  } // end else
-} // end function insert
-
-// delete a list element
-/*int LL::deletes(int value) 
-{
-  SCOREPtr previousPtr; // pointer to previous node in list
-  SCOREPtr currentPtr;  // pointer to current node in list
-  SCOREPtr tempPtr;     // temporary node pointer
-
-  // delete first node
-  if (value == hol->get_score()) {
-    tempPtr = hol;  // hold onto node being removed
-    hol = hol->get_next(); // de-thread the nodes
- 
-    size--;
-
-    delete tempPtr; // free the de-threaded node
-
-    return value;
-  } // end if
-  else {
-    previousPtr = hol;
-    currentPtr = hol->get_next();
-
-    // loop to find the correct location in the list
-    while (currentPtr != NULL && currentPtr->get_score() != value) {
-      previousPtr = currentPtr;            // walk to ...
-      currentPtr = currentPtr->get_next(); // ... next node
-      if (currentPtr == hol)
-        currentPtr = NULL;
-    } // end while
-
-    // delete node  currentPtr
-    if (currentPtr != NULL) 
-    {
-      tempPtr = currentPtr;
-      currentPtr = currentPtr->get_next();
-      previousPtr->set_next(currentPtr);
-     
-    
-      delete tempPtr;
-      size--;
-      return value;
-    } // end if
-  }   // end else
-
-  return '\0';
-} // end function delete*/
+  } 
+}
 
 
 int LL::isEmpty() { return hol == NULL; } 
@@ -136,8 +89,10 @@ void LL::printListR()
       currentPtr = currentPtr->get_next();
     for (i = 1 ;i <=size; i++)
      {
+      if(i<=5){
       cout<<i<<". ";
       currentPtr->print();
+      }
       currentPtr = currentPtr->get_prev();
     } 
     
