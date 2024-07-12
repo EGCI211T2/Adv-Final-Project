@@ -121,7 +121,7 @@ int main() {
 
         displayMenu();
         do {
-            cin >> option;
+            option=getchar();
             switch (option) {
                 case 'x':
                     clear();
@@ -133,7 +133,7 @@ int main() {
         } while (option != 'x');
 
         do {
-            cin >> chr;
+            chr=getchar();
             switch (chr) {
                 case 'x':
                     clear();
@@ -165,6 +165,7 @@ int main() {
                             case 0:
                             cout<<"You lose"<<endl;
                             sleep(2);
+                            system("clear");
                             break;
                             case 1:
                             cout<<"You win"<<endl;
@@ -183,6 +184,8 @@ int main() {
                     }while(c==1&&result==1);
                 }
                             if(result==1){
+                            sleep(2);
+                            system("clear");
                             cout<<"You have saved the world's energy "<<round<<" times."<<endl;
                             sleep(2);
                             cout<<"You have eliminated these monsters."<<endl;
@@ -198,6 +201,7 @@ int main() {
                             else{
                             cout<<"You have saved the world's energy "<<round-1<<" times."<<endl;
                             sleep(2);
+                            if(round-1>0){
                             cout<<"You have eliminated these monsters."<<endl;
                             sleep(2);
                             for(int i=1;i<round;i++)
@@ -205,6 +209,7 @@ int main() {
                                 cout<<i<<".";
                                 s.pop();
                                 sleep(1);
+                            }
                             }
                             vhigh(name1,round-1);
                             }

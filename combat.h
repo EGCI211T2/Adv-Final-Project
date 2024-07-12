@@ -79,6 +79,7 @@ void monster::upgrade(){
             c=numin();
             if(c<1||c>5){
                 cout<<"Please choose number in the list."<<endl;
+                sleep(2);
                 continue;
             }
             else{
