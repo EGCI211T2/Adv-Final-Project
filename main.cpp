@@ -16,7 +16,7 @@ void displayMenu() {
     cout <<"\\    \\_\\  \\ |  |  /  / __ \\_  |  | \\/ / /_/ |  |  |  / __ \\_ |   |  \\  \\___ \\      (  <_> )  |  |         |  |   |   Y  \\ \\  ___/       |        \\ |   |  \\ \\  ___/   |  | \\/  \\___  /   \\___  |"<<endl;
     cout <<" \\______  / |____/  (____  /  |__|    \\____ |  |__| (____  / |___|  / /____  >      \\____/   |__|         |__|   |___|  /  \\___  >     /_______  / |___|  /  \\___  >  |__|    /_____/    / ____|"<<endl;
     cout <<"        \\/               \\/                \\/            \\/       \\/       \\/                                         \\/       \\/              \\/       \\/       \\/                      \\/     "<<endl;
-    cout << "press x to continue" << endl;
+    cout << "press Enter to continue" << endl;
 }
 
 void characterMenu(LL x) {
@@ -78,7 +78,7 @@ void intro() {
     }
     cout << endl<<endl;
 
-    cout << "Press x to continue." << endl;
+    cout << "Press Enter to continue." << endl;
 }
 
 void loading() {
@@ -123,26 +123,26 @@ int main() {
         do {
             option=getchar();
             switch (option) {
-                case 'x':
+                case '\n':
                     clear();
                     intro();
                     break;
                 default:
                     cout << "Invalid option! Please try again.\n";
             }
-        } while (option != 'x');
+        } while (option != '\n');
 
         do {
             chr=getchar();
             switch (chr) {
-                case 'x':
+                case '\n':
                     clear();
                     loading();
                     break;
                 default:
                     cout << "Invalid character! Please try again.\n";
             }
-        } while (chr != 'x');
+        } while (chr != '\n');
 
         do {
             characterMenu(h);
@@ -174,7 +174,6 @@ int main() {
                         }
                         if(result==1){
                         do{
-                            c;
                             cout << "Do you want to continue?(1.Yes/2.No): ";
                             c=numin();
                             
